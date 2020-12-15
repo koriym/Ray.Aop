@@ -2,7 +2,8 @@ name: "Continuous Integration"
 
 on:
   ["pull_request", "push", "workflow_dispatch"]
-
+  schedule:
+    - cron: "42 15 * * *"
 jobs:
   phpunit:
     name: "PHPUnit"

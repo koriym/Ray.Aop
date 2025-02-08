@@ -68,7 +68,7 @@ class ReflectionClass extends \ReflectionClass implements Reader
      * @psalm-suppress MethodSignatureMismatch
      * @psalm-external-mutation-free
      */
-    public function getConstructor(): ?ReflectionMethod
+    public function getConstructor(): ?\ReflectionMethod
     {
         $parent = parent::getConstructor();
         if ($parent === null) {

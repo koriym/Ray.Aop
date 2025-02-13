@@ -22,9 +22,9 @@ trait Php82InterceptTrait
     /**
      * @param array<string, array<MethodInterceptor|string>> $bindings
      *
-     * @see WeavedInterface::initState()
+     * @see WeavedInterface::_initState()
      */
-    public function initState(array $bindings): void
+    public function _initState(array $bindings): void
     {
         $this->state = new InterceptTraitState($bindings, true);
     }

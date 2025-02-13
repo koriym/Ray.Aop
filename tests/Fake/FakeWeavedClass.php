@@ -9,5 +9,5 @@ class FakeWeavedClass extends FakeClass implements WeavedInterface
     /**
      * {@inheritDoc}
      */
-    public function initState(array $bindings): void {}
+    public function _initState(array $bindings): void {}
 }

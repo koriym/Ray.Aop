@@ -8,6 +8,7 @@ use Ray\Aop\ReflectiveMethodInvocation as Invocation;
 
 use function call_user_func_array;
 
+/** @psalm-import-type MethodBindings from Types */
 trait InterceptTrait
 {
     /**
@@ -18,7 +19,7 @@ trait InterceptTrait
     public $state;
 
     /**
-     * @param array<string, array<MethodInterceptor|string>> $bindings
+     * @param MethodBindings $bindings
      *
      * @see WeavedInterface::initState()
      */

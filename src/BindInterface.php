@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace Ray\Aop;
 
-/** @psalm-import-type MethodName from Types */
+/**
+ * @psalm-import-type MethodName from Types
+ * @psalm-import-type MethodBindings from Types
+ */
 interface BindInterface
 {
     /**
@@ -28,7 +31,7 @@ interface BindInterface
      *
      * [$methodNameA => [$interceptorA, ...][]
      *
-     * @return array<string, array<MethodInterceptor|string>>
+     * @return MethodBindings
      */
     public function getBindings();
 

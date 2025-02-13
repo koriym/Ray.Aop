@@ -25,7 +25,7 @@ trait Php82InterceptTrait
      */
     public function _initState(array $bindings): void
     {
-        $this->_state = new InterceptTraitState($bindings, true);
+        $this->_state = new InterceptTraitState($bindings);
     }
 
     /**

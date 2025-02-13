@@ -14,6 +14,7 @@ trait InterceptTrait
     /**
      * @var InterceptTraitState
      * @readonly
+     * @psalm-suppress MissingConstructor
      */
     private $_state;
 
@@ -25,7 +26,7 @@ trait InterceptTrait
      */
     public function _initState(array $bindings): void // phpcs:ignore
     {
-        $this->_state = new InterceptTraitState($bindings, true);
+        $this->_state = new InterceptTraitState($bindings);
     }
 
     /**

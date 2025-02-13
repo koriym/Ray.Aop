@@ -4,24 +4,21 @@ declare(strict_types=1);
 
 namespace Ray\Aop;
 
+/** @psalm-import-type MethodBindings from Types */
 final class InterceptTraitState
 {
     /**
-     * @var array<string, array<class-string<MethodInterceptor>>>
+     * @var MethodBindings
      * @readonly
      */
     public $bindings;
 
     /** @var bool */
-    public $isAspect;
+    public $isAspect = true;
 
-    /**
-     * @param array<string, array<class-string<MethodInterceptor>>> $bindings
-     * @param bool                                                  $isAspect
-     */
-    public function __construct($bindings, $isAspect)
+    /** @param MethodBindings $bindings */
+    public function __construct(array $bindings)
     {
         $this->bindings = $bindings;
-        $this->isAspect = $isAspect;
     }
 }

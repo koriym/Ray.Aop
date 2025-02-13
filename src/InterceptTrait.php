@@ -14,9 +14,8 @@ trait InterceptTrait
     /**
      * @var InterceptTraitState
      * @readonly
-     * @internal Public for CompilerTest
      */
-    public $_state;
+    private $_state;
 
     /**
      * @param MethodBindings $bindings

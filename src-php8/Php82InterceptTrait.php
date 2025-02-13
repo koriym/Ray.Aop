@@ -15,9 +15,8 @@ trait Php82InterceptTrait
 {
     /**
      * @var InterceptTraitState
-     * @internal Public for CompilerTest
      */
-    public readonly InterceptTraitState $_state;
+    private readonly InterceptTraitState $_state;
 
     /**
      * @param array<string, array<MethodInterceptor|string>> $bindings

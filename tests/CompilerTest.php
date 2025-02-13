@@ -78,8 +78,8 @@ class CompilerTest extends TestCase
     /** @depends testNewInstance */
     public function testBuildClassWeaved(FakeMock $weaved): void
     {
-        assert(isset($weaved->bindings));
-        $weaved->bindings = $this->bind->getBindings();
+        assert(property_exists($weaved, 'state'));
+        $weaved->state->bindings = $this->bind->getBindings();
         $result = $weaved->returnSame(1);
         $this->assertSame(2, $result);
     }
@@ -117,8 +117,8 @@ class CompilerTest extends TestCase
     {
         $mock = $this->compiler->newInstance(FakeMockGrandChild::class, [], $this->bind);
         assert($mock instanceof FakeMockGrandChild);
-        assert(property_exists($mock, 'bindings'));
-        $mock->bindings = $this->bind->getBindings();
+        assert(property_exists($mock, 'state'));
+        $mock->state->bindings = $this->bind->getBindings();
         $result = $mock->returnSame(1);
         $this->assertSame(2, $result);
     }
@@ -128,8 +128,8 @@ class CompilerTest extends TestCase
         $bind = (new Bind())->bindInterceptors('passIterator', [new NullInterceptor()]);
         $mock = $this->compiler->newInstance(FakeTypedMockGrandChild::class, [], $bind);
         assert($mock instanceof FakeTypedMockGrandChild);
-        assert(property_exists($mock, 'bindings'));
-        $mock->bindings = $bind->getBindings();
+        assert(property_exists($mock, 'state'));
+        $mock->state->bindings = $bind->getBindings();
         $result = $mock->passIterator(new ArrayIterator());
         $this->assertInstanceOf(ArrayIterator::class, $result);
     }
@@ -138,8 +138,8 @@ class CompilerTest extends TestCase
     {
         $mock = $this->compiler->newInstance(FakeMockChildChild::class, [], $this->bind);
         assert($mock instanceof FakeMockChild);
-        assert(property_exists($mock, 'bindings'));
-        $mock->bindings = $this->bind->getBindings();
+        assert(property_exists($mock, 'state'));
+        $mock->state->bindings = $this->bind->getBindings();
         $result = $mock->returnSame(1);
         $this->assertSame(2, $result);
     }
@@ -348,6 +348,14 @@ class CompilerTest extends TestCase
     {
         $mock = $this->compiler->newInstance(FakeMixedParamClass::class, [], $this->bind);
         $this->assertInstanceOf(FakeMixedParamClass::class, $mock);
+        $this->assertInstanceOf(WeavedInterface::class, $mock);
+    }
+
+    /** @requires PHP 8.2 */
+    public function testNewInstanceWithPhp82ReadOnlyClass(): void
+    {
+        $mock = $this->compiler->newInstance(FakePhp82ReadOnlyClass::class, [], $this->bind);
+        $this->assertInstanceOf(FakePhp82ReadOnlyClass::class, $mock);
         $this->assertInstanceOf(WeavedInterface::class, $mock);
     }
 }

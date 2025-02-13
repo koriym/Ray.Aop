@@ -8,14 +8,16 @@ use Ray\Aop\ReflectiveMethodInvocation as Invocation;
 
 use function call_user_func_array;
 
-trait InterceptTrait
+/**
+ * WARNING: All properties in this trait must be readonly to allow its use in a readonly class.
+ */
+trait Php82InterceptTrait
 {
     /**
      * @var InterceptTraitState
-     * @readonly
      * @internal Public for CompilerTest
      */
-    public $state;
+    public readonly InterceptTraitState $state;
 
     /**
      * @param array<string, array<MethodInterceptor|string>> $bindings

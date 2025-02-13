@@ -57,12 +57,12 @@ final class Weaver
     {
         $aopClass = $this->weave($class);
         $instance = (new ReflectionClass($aopClass))->newInstanceArgs($args);
-        if (! isset($instance->bindings)) {
+        if (! $instance instanceof WeavedInterface) {
             /** @var T $instance  */
             return $instance;
         }
 
-        $instance->bindings = $this->bind->getBindings();
+        $instance->initState($this->bind->getBindings());
         assert($instance instanceof $class);
 
         return $instance;

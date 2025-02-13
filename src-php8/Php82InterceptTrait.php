@@ -17,7 +17,7 @@ trait Php82InterceptTrait
      * @var InterceptTraitState
      * @internal Public for CompilerTest
      */
-    public readonly InterceptTraitState $state;
+    public readonly InterceptTraitState $_state;
 
     /**
      * @param array<string, array<MethodInterceptor|string>> $bindings
@@ -26,7 +26,7 @@ trait Php82InterceptTrait
      */
     public function _initState(array $bindings): void
     {
-        $this->state = new InterceptTraitState($bindings, true);
+        $this->_state = new InterceptTraitState($bindings, true);
     }
 
     /**
@@ -38,15 +38,15 @@ trait Php82InterceptTrait
      */
     private function _intercept(string $func, array $args) // phpcs:ignore
     {
-        if (! $this->state->isAspect) {
-            $this->state->isAspect = true;
+        if (! $this->_state->isAspect) {
+            $this->_state->isAspect = true;
 
             return call_user_func_array([parent::class, $func], $args);
         }
 
-        $this->state->isAspect = false;
-        $result = (new Invocation($this, $func, $args, $this->state->bindings[$func]))->proceed();
-        $this->state->isAspect = true;
+        $this->_state->isAspect = false;
+        $result = (new Invocation($this, $func, $args, $this->_state->bindings[$func]))->proceed();
+        $this->_state->isAspect = true;
 
         return $result;
     }

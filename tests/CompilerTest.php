@@ -78,8 +78,8 @@ class CompilerTest extends TestCase
     /** @depends testNewInstance */
     public function testBuildClassWeaved(FakeMock $weaved): void
     {
-        assert(property_exists($weaved, 'state'));
-        $weaved->state->bindings = $this->bind->getBindings();
+        assert(property_exists($weaved, '_state'));
+        $weaved->_state->bindings = $this->bind->getBindings();
         $result = $weaved->returnSame(1);
         $this->assertSame(2, $result);
     }
@@ -117,8 +117,7 @@ class CompilerTest extends TestCase
     {
         $mock = $this->compiler->newInstance(FakeMockGrandChild::class, [], $this->bind);
         assert($mock instanceof FakeMockGrandChild);
-        assert(property_exists($mock, 'state'));
-        $mock->state->bindings = $this->bind->getBindings();
+        assert(property_exists($mock, '_state'));
         $result = $mock->returnSame(1);
         $this->assertSame(2, $result);
     }
@@ -128,8 +127,8 @@ class CompilerTest extends TestCase
         $bind = (new Bind())->bindInterceptors('passIterator', [new NullInterceptor()]);
         $mock = $this->compiler->newInstance(FakeTypedMockGrandChild::class, [], $bind);
         assert($mock instanceof FakeTypedMockGrandChild);
-        assert(property_exists($mock, 'state'));
-        $mock->state->bindings = $bind->getBindings();
+        assert(property_exists($mock, '_state'));
+        $mock->_state->bindings = $bind->getBindings();
         $result = $mock->passIterator(new ArrayIterator());
         $this->assertInstanceOf(ArrayIterator::class, $result);
     }
@@ -138,8 +137,8 @@ class CompilerTest extends TestCase
     {
         $mock = $this->compiler->newInstance(FakeMockChildChild::class, [], $this->bind);
         assert($mock instanceof FakeMockChild);
-        assert(property_exists($mock, 'state'));
-        $mock->state->bindings = $this->bind->getBindings();
+        assert(property_exists($mock, '_state'));
+        $mock->_state->bindings = $this->bind->getBindings();
         $result = $mock->returnSame(1);
         $this->assertSame(2, $result);
     }

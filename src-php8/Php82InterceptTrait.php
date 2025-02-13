@@ -9,17 +9,15 @@ use Ray\Aop\ReflectiveMethodInvocation as Invocation;
 use function call_user_func_array;
 
 /**
- * WARNING: All properties in this trait must be readonly to allow its use in a readonly class.
+ * @psalm-import-type MethodBindings from Types
+ * @psalm-import-type Arguments from Types
  */
 trait Php82InterceptTrait
 {
-    /**
-     * @var InterceptTraitState
-     */
     private readonly InterceptTraitState $_state;
 
     /**
-     * @param array<string, array<MethodInterceptor|string>> $bindings
+     * @param MethodBindings $bindings
      *
      * @see WeavedInterface::_initState()
      */
@@ -29,7 +27,7 @@ trait Php82InterceptTrait
     }
 
     /**
-     * @param array<string, mixed> $args
+     * @param Arguments $args
      *
      * @return mixed
      *

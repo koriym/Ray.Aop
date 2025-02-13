@@ -6,4 +6,5 @@ namespace Ray\Aop;
 
 class FakeMockChild extends FakeMock
 {
+    public $state;
 }

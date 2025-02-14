@@ -21,7 +21,6 @@ use function assert;
 use function class_exists;
 use function file_get_contents;
 use function passthru;
-use function property_exists;
 use function serialize;
 use function unserialize;
 
@@ -115,7 +114,6 @@ class CompilerTest extends TestCase
     {
         $mock = $this->compiler->newInstance(FakeMockGrandChild::class, [], $this->bind);
         assert($mock instanceof FakeMockGrandChild);
-        assert(property_exists($mock, '_state'));
         $result = $mock->returnSame(1);
         $this->assertSame(2, $result);
     }
@@ -125,7 +123,6 @@ class CompilerTest extends TestCase
         $bind = (new Bind())->bindInterceptors('passIterator', [new NullInterceptor()]);
         $mock = $this->compiler->newInstance(FakeTypedMockGrandChild::class, [], $bind);
         assert($mock instanceof FakeTypedMockGrandChild);
-        assert(property_exists($mock, '_state'));
         $result = $mock->passIterator(new ArrayIterator());
         $this->assertInstanceOf(ArrayIterator::class, $result);
     }
@@ -134,7 +131,6 @@ class CompilerTest extends TestCase
     {
         $mock = $this->compiler->newInstance(FakeMockChildChild::class, [], $this->bind);
         assert($mock instanceof FakeMockChild);
-        assert(property_exists($mock, '_state'));
         $result = $mock->returnSame(1);
         $this->assertSame(2, $result);
     }

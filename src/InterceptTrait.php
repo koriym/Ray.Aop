@@ -14,12 +14,11 @@ trait InterceptTrait
     /**
      * @var MethodBindings
      * @readonly
+     * @deprecated Do not use this property directly. Use the `_initState` setter method instead for initialization.
      */
     public $bindings = [];
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     private $_isAspect = true;
 
     /**

@@ -139,8 +139,7 @@ final class AopCode
 
             $isClassSignatureEnds = $inClass && $text === '{';
             if ($isClassSignatureEnds) {
-                $isReadOnly = PHP_VERSION_ID >= 80000 && $sourceClass->isReadOnly();
-                $isReadOnly ? $this->addReadOnlyIntercepterTrait() : $this->addIntercepterTrait();
+                $this->resolveInterceptTrait($sourceClass);
 
                 return;
             }
@@ -202,7 +201,7 @@ final class AopCode
     }
 
     /** @psalm-external-mutation-free */
-    private function addIntercepterTrait(): void
+    private function addInterceporTrait(): void
     {
         $this->add(sprintf("{\n    use \%s;\n}\n", InterceptTrait::class));
     }
@@ -210,7 +209,7 @@ final class AopCode
     /** @psalm-external-mutation-free */
     private function addReadOnlyIntercepterTrait(): void
     {
-        $this->add(sprintf("{\n    use \%s;\n}\n", Php82InterceptTrait::class));
+        $this->add(sprintf("{\n    use \%s;\n}\n", ReadOnlyInterceptTrait::class));
     }
 
     /** @psalm-external-mutation-free */
@@ -223,5 +222,17 @@ final class AopCode
         }
 
         return $this->code;
+    }
+
+    /** @param ReflectionClass<object> $sourceClass */
+    public function resolveInterceptTrait(ReflectionClass $sourceClass): void
+    {
+        if (PHP_VERSION_ID >= 80200 && $sourceClass->isReadOnly()) {
+            $this->addReadOnlyIntercepterTrait();
+
+            return;
+        }
+
+        $this->addInterceporTrait();
     }
 }

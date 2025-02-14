@@ -12,7 +12,7 @@ use function call_user_func_array;
  * @psalm-import-type MethodBindings from Types
  * @psalm-import-type Arguments from Types
  */
-trait Php82InterceptTrait
+trait ReadOnlyInterceptTrait
 {
     private readonly InterceptTraitState $_state;
 

@@ -8,29 +8,26 @@ use Ray\Aop\ReflectiveMethodInvocation as Invocation;
 
 use function call_user_func_array;
 
-/** @psalm-import-type MethodBindings from Types */
-trait InterceptTrait
+/**
+ * @psalm-import-type MethodBindings from Types
+ * @psalm-import-type Arguments from Types
+ */
+trait Php82InterceptTrait
 {
-    /**
-     * @var InterceptTraitState
-     * @readonly
-     * @psalm-suppress MissingConstructor
-     */
-    private $_state;
+    private readonly InterceptTraitState $_state;
 
     /**
      * @param MethodBindings $bindings
      *
      * @see WeavedInterface::_initState()
-     * @SuppressWarnings(PHPMD.CamelCaseMethodName)
      */
-    public function _initState(array $bindings): void // phpcs:ignore
+    public function _initState(array $bindings): void
     {
         $this->_state = new InterceptTraitState($bindings);
     }
 
     /**
-     * @param array<string, mixed> $args
+     * @param Arguments $args
      *
      * @return mixed
      *

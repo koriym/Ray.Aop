@@ -19,6 +19,7 @@ use function preg_replace_callback;
 use function sprintf;
 use function token_get_all;
 
+use const PHP_VERSION_ID;
 use const T_CLASS;
 use const T_EXTENDS;
 use const T_STRING;
@@ -202,7 +203,9 @@ final class AopCode
     /** @psalm-external-mutation-free */
     private function addIntercepterTrait(): void
     {
-        $this->add(sprintf("{\n    use \%s;\n}\n", InterceptTrait::class));
+        PHP_VERSION_ID >= 80200
+            ? $this->add(sprintf("{\n    use \%s;\n}\n", Php82InterceptTrait::class))
+            : $this->add(sprintf("{\n    use \%s;\n}\n", InterceptTrait::class));
     }
 
     /** @psalm-external-mutation-free */

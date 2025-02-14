@@ -24,10 +24,10 @@ trait InterceptTrait
     /**
      * @param MethodBindings $bindings
      *
-     * @see WeavedInterface::_initState()
+     * @see WeavedInterface::_setBindings()
      * @SuppressWarnings(PHPMD.CamelCaseMethodName)
      */
-    public function _initState(array $bindings): void // @phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
+    public function _setBindings(array $bindings): void // @phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
     {
         $this->bindings = $bindings;
     }

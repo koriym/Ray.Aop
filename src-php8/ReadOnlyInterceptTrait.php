@@ -19,9 +19,9 @@ trait ReadOnlyInterceptTrait
     /**
      * @param MethodBindings $bindings
      *
-     * @see WeavedInterface::_initState()
+     * @see WeavedInterface::_setBindings()
      */
-    public function _initState(array $bindings): void
+    public function _setBindings(array $bindings): void
     {
         $this->_state = new InterceptTraitState($bindings);
     }

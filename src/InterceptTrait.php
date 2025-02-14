@@ -25,8 +25,9 @@ trait InterceptTrait
      * @param MethodBindings $bindings
      *
      * @see WeavedInterface::_initState()
+     * @SuppressWarnings(PHPMD.CamelCaseMethodName)
      */
-    public function _initState(array $bindings): void
+    public function _initState(array $bindings): void // @phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
     {
         $this->bindings = $bindings;
     }

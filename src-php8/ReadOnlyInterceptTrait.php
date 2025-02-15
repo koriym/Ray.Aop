@@ -12,16 +12,16 @@ use function call_user_func_array;
  * @psalm-import-type MethodBindings from Types
  * @psalm-import-type Arguments from Types
  */
-trait Php82InterceptTrait
+trait ReadOnlyInterceptTrait
 {
     private readonly InterceptTraitState $_state;
 
     /**
      * @param MethodBindings $bindings
      *
-     * @see WeavedInterface::_initState()
+     * @see WeavedInterface::_setBindings()
      */
-    public function _initState(array $bindings): void
+    public function _setBindings(array $bindings): void
     {
         $this->_state = new InterceptTraitState($bindings);
     }

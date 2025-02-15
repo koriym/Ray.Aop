@@ -62,7 +62,7 @@ final class Weaver
             return $instance;
         }
 
-        $instance->_initState($this->bind->getBindings());
+        $instance->_setBindings($this->bind->getBindings());
         assert($instance instanceof $class);
 
         return $instance;

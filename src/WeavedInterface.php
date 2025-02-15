@@ -12,5 +12,5 @@ interface WeavedInterface
      *
      * @SuppressWarnings(PHPMD.CamelCaseMethodName)
      */
-    public function _initState(array $bindings): void; // phpcs:ignore
+    public function _setBindings(array $bindings): void; // phpcs:ignore
 }

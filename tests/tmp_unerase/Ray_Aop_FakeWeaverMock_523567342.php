@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Ray\Aop;
 
 /** doc comment of FakeMock */
-class FakeWeaverMock_523567342 extends FakeWeaverMock implements \Ray\Aop\WeavedInterface 
+class FakeWeaverMock_523567342 extends FakeWeaverMock implements \Ray\Aop\WeavedInterface
 {
-    use \Ray\Aop\Php82InterceptTrait;
+    use \Ray\Aop\ReadOnlyInterceptTrait;
     /**
      * doc comment of returnSame
      */

@@ -12,21 +12,24 @@ use function call_user_func_array;
 trait InterceptTrait
 {
     /**
-     * @var InterceptTraitState
+     * @var MethodBindings
      * @readonly
-     * @psalm-suppress MissingConstructor
+     * @deprecated Do not use this property directly. Use the `_setBindings` setter method instead for initialization.
      */
-    private $_state;
+    public $bindings = [];
+
+    /** @var bool Flag controlling whether aspect interception is active */
+    private $_isAspect = true;
 
     /**
      * @param MethodBindings $bindings
      *
-     * @see WeavedInterface::_initState()
+     * @see WeavedInterface::_setBindings()
      * @SuppressWarnings(PHPMD.CamelCaseMethodName)
      */
-    public function _initState(array $bindings): void // phpcs:ignore
+    public function _setBindings(array $bindings): void // @phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
     {
-        $this->_state = new InterceptTraitState($bindings);
+        $this->bindings = $bindings;
     }
 
     /**
@@ -38,15 +41,15 @@ trait InterceptTrait
      */
     private function _intercept(string $func, array $args) // phpcs:ignore
     {
-        if (! $this->_state->isAspect) {
-            $this->_state->isAspect = true;
+        if (! $this->_isAspect) {
+            $this->_isAspect = true;
 
             return call_user_func_array([parent::class, $func], $args);
         }
 
-        $this->_state->isAspect = false;
-        $result = (new Invocation($this, $func, $args, $this->_state->bindings[$func]))->proceed();
-        $this->_state->isAspect = true;
+        $this->_isAspect = false;
+        $result = (new Invocation($this, $func, $args, $this->bindings[$func]))->proceed();
+        $this->_isAspect = true;
 
         return $result;
     }

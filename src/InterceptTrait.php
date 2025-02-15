@@ -18,7 +18,7 @@ trait InterceptTrait
      */
     public $bindings = [];
 
-    /** @var bool */
+    /** @var bool Flag controlling whether aspect interception is active */
     private $_isAspect = true;
 
     /**

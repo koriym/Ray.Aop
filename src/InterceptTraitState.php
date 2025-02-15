@@ -13,7 +13,7 @@ final class InterceptTraitState
      */
     public $bindings;
 
-    /** @var bool */
+    /** @var bool Flag controlling whether aspect interception is active */
     public $isAspect = true;
 
     /** @param MethodBindings $bindings */

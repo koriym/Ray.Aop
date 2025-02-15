@@ -207,7 +207,7 @@ final class AopCode
     }
 
     /** @psalm-external-mutation-free */
-    private function addReadOnlyIntercepterTrait(): void
+    private function addReadOnlyInterceptorTrait(): void
     {
         $this->add(sprintf("{\n    use \%s;\n}\n", ReadOnlyInterceptTrait::class));
     }
@@ -228,7 +228,7 @@ final class AopCode
     public function resolveInterceptTrait(ReflectionClass $sourceClass): void
     {
         if (PHP_VERSION_ID >= 80200 && $sourceClass->isReadOnly()) {
-            $this->addReadOnlyIntercepterTrait();
+            $this->addReadOnlyInterceptorTrait();
 
             return;
         }

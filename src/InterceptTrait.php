@@ -9,7 +9,7 @@ use Ray\Aop\ReflectiveMethodInvocation as Invocation;
 use function call_user_func_array;
 
 /** @psalm-import-type MethodBindings from Types */
-trait InterceptTrait
+trait InterceptTrait // @phpstan-ignore-line
 {
     /**
      * @var MethodBindings

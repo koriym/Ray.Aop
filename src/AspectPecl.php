@@ -104,7 +104,6 @@ final class AspectPecl
         foreach ($boundInterceptors as $className => $methods) {
             $methodNames = array_keys($methods);
             foreach ($methodNames as $methodName) {
-                assert($dispatcher instanceof MethodInterceptorInterface);
                 method_intercept($className, $methodName, $dispatcher);
             }
         }

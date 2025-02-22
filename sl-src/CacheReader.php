@@ -52,7 +52,7 @@ final class CacheReader implements Reader
      * {@inheritDoc}
      */
     #[\Override]
-    public function getClassAnnotations(ReflectionClass $class) // @phpstan-ignore-line
+    public function getClassAnnotations(ReflectionClass $class)
     {
         $cacheKey = $class->getName();
 
@@ -69,7 +69,7 @@ final class CacheReader implements Reader
      * {@inheritDoc}
      */
     #[\Override]
-    public function getClassAnnotation(ReflectionClass $class, $annotationName) // @phpstan-ignore-line
+    public function getClassAnnotation(ReflectionClass $class, $annotationName)
     {
         foreach ($this->getClassAnnotations($class) as $annot) {
             if ($annot instanceof $annotationName) {
@@ -148,8 +148,9 @@ final class CacheReader implements Reader
             $cacheKey,
             /** @return array<object> */
             function () use ($method, $reflector): array {
-                /** @psalm-suppress MixedReturnStatement */
-                return $this->delegate->{$method}($reflector);
+                /** @var array<object> $annotations */
+                $annotations = $this->delegate->{$method}($reflector);
+                return $annotations;
             }
         );
     }

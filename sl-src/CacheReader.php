@@ -51,6 +51,7 @@ final class CacheReader implements Reader
     /**
      * {@inheritDoc}
      */
+    #[\Override]
     public function getClassAnnotations(ReflectionClass $class) // @phpstan-ignore-line
     {
         $cacheKey = $class->getName();
@@ -67,6 +68,7 @@ final class CacheReader implements Reader
     /**
      * {@inheritDoc}
      */
+    #[\Override]
     public function getClassAnnotation(ReflectionClass $class, $annotationName) // @phpstan-ignore-line
     {
         foreach ($this->getClassAnnotations($class) as $annot) {
@@ -81,6 +83,7 @@ final class CacheReader implements Reader
     /**
      * {@inheritDoc}
      */
+    #[\Override]
     public function getPropertyAnnotations(ReflectionProperty $property)
     {
         throw new LogicException(__FUNCTION__ . ' Not Supported');
@@ -89,6 +92,7 @@ final class CacheReader implements Reader
     /**
      * {@inheritDoc}
      */
+    #[\Override]
     public function getPropertyAnnotation(ReflectionProperty $property, $annotationName)
     {
         throw new LogicException(__FUNCTION__ . ' Not Supported');
@@ -97,6 +101,7 @@ final class CacheReader implements Reader
     /**
      * {@inheritDoc}
      */
+    #[\Override]
     public function getMethodAnnotations(ReflectionMethod $method)
     {
         $class    = $method->getDeclaringClass();
@@ -114,6 +119,7 @@ final class CacheReader implements Reader
     /**
      * {@inheritDoc}
      */
+    #[\Override]
     public function getMethodAnnotation(ReflectionMethod $method, $annotationName)
     {
         foreach ($this->getMethodAnnotations($method) as $annot) {

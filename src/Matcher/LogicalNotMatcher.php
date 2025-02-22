@@ -15,6 +15,7 @@ final class LogicalNotMatcher extends AbstractMatcher
     /**
      * {@inheritDoc}
      */
+    #[\Override]
     public function matchesClass(ReflectionClass $class, array $arguments): bool
     {
         [$matcher] = $arguments;
@@ -26,6 +27,7 @@ final class LogicalNotMatcher extends AbstractMatcher
     /**
      * {@inheritDoc}
      */
+    #[\Override]
     public function matchesMethod(ReflectionMethod $method, array $arguments): bool
     {
         [$matcher] = $arguments;

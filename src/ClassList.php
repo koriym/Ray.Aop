@@ -76,6 +76,7 @@ final class ClassList implements IteratorAggregate
     }
 
     /** @return Generator<class-string> */
+    #[\Override]
     public function getIterator(): Generator
     {
         $files = new RegexIterator(

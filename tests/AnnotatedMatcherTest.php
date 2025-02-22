@@ -12,7 +12,11 @@ use function unserialize;
 
 class AnnotatedMatcherTest extends TestCase
 {
-    public function testSerialize(): void
+    /**
+     * Tests that AnnotatedMatcher can be serialized and unserialized
+     * while maintaining its functionality
+     */
+    public function testAnnotatedMatcherSerialization(): void
     {
         $matcher = new AnnotatedMatcher('annotatedWith', [FakeMarker::class]);
         $this->assertInstanceOf(AnnotatedMatcher::class, unserialize(serialize($matcher)));

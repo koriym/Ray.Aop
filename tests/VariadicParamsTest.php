@@ -8,7 +8,10 @@ use PHPUnit\Framework\TestCase;
 
 class VariadicParamsTest extends TestCase
 {
-    public function testVariadicParams(): void
+    /**
+     * Tests that variadic parameters work correctly with interceptors
+     */
+    public function testVariadicParametersWithInterceptor(): void
     {
         $compiler = new Compiler(__DIR__ . '/tmp');
         $matcher = new Matcher();

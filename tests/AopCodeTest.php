@@ -29,7 +29,10 @@ class AopCodeTest extends TestCase
         $this->codeGen = new AopCode(new MethodSignatureString(PHP_VERSION_ID));
     }
 
-    public function testTypeDeclarations(): void
+    /**
+     * Tests that AopCode generates correct code for methods with type declarations
+     */
+    public function testGenerateCodeWithTypeDeclarations(): void
     {
         $bind = new Bind();
         $bind->bindInterceptors('run', []);
@@ -38,7 +41,10 @@ class AopCodeTest extends TestCase
         $this->assertStringContainsString($expected, $code);
     }
 
-    public function testReturnType(): void
+    /**
+     * Tests that AopCode generates correct code for methods with return type declarations
+     */
+    public function testGenerateCodeWithReturnType(): void
     {
         $bind = new Bind();
         $bind->bindInterceptors('returnTypeArray', []);
@@ -47,8 +53,13 @@ class AopCodeTest extends TestCase
         $this->assertStringContainsString($expected, $code);
     }
 
-    /** @requires PHP 8.1 */
-    public function testVariousMethodSignature(): void
+    /**
+     * Tests that AopCode generates correct code for various PHP 8.1 method signatures
+     * including union types, nullable types, default values, and attributes
+     *
+     * @requires PHP 8.1
+     */
+    public function testGenerateCodeWithVariousMethodSignatures(): void
     {
         $bind = new Bind();
         for ($i = 1; $i <= 25; $i++) {
@@ -131,8 +142,13 @@ class AopCodeTest extends TestCase
         $this->assertStringContainsString("public function method25(#[\Ray\Aop\Attribute\FakeAttr1()] \$a, #[\Ray\Aop\Attribute\FakeAttr1()] #[\Ray\Aop\Attribute\FakeAttr2(name: 'famicon', age: 40)] \$b): void", $code);
     }
 
-    /** @requires PHP 8.2 */
-    public function testVariousMethodSignaturePhp82(): void
+    /**
+     * Tests that AopCode generates correct code for PHP 8.2 specific method signatures
+     * including true/false/null return types and intersection types
+     *
+     * @requires PHP 8.2
+     */
+    public function testGenerateCodeWithPhp82MethodSignatures(): void
     {
         $bind = new Bind();
         for ($i = 100; $i <= 106; $i++) {
@@ -154,7 +170,10 @@ class AopCodeTest extends TestCase
         $this->assertStringContainsString('public function method106(): (\Ray\Aop\FakeNullInterface&\Ray\Aop\FakeNullInterface1)|string', $code);
     }
 
-    public function testInvalidSourceClass(): void
+    /**
+     * Tests that AopCode throws InvalidSourceClassException when given an invalid source class
+     */
+    public function testGenerateCodeWithInvalidSourceClassThrowsException(): void
     {
         $this->expectException(InvalidSourceClassException::class);
         $this->codeGen->generate(new ReflectionClass(stdClass::class), new Bind(), '_test');

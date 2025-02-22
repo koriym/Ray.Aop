@@ -18,31 +18,46 @@ class ReflectionClassTest extends TestCase
         $this->class = new ReflectionClass(FakeClassTartget::class); // @phpstan-ignore-line
     }
 
-    public function testGetAnnottaions(): void
+    /**
+     * Tests that getAnnotations() returns all annotations on the class
+     */
+    public function testGetClassAnnotations(): void
     {
         $annotations = $this->class->getAnnotations();
         $this->assertSame(2, count($annotations));
     }
 
-    public function testGetAnnottaion(): void
+    /**
+     * Tests that getAnnotation() returns a specific annotation instance
+     */
+    public function testGetClassAnnotation(): void
     {
         $annotation = $this->class->getAnnotation(FakeResource::class);
         $this->assertInstanceOf(FakeResource::class, $annotation);
     }
 
-    public function testGetMethods(): void
+    /**
+     * Tests that getMethods() returns all methods as ReflectionMethod instances
+     */
+    public function testGetClassMethods(): void
     {
         $methods = $this->class->getMethods();
         $this->assertAllInstanceOfMethod($methods);
     }
 
-    public function testConstructor(): void
+    /**
+     * Tests that getConstructor() returns ReflectionMethod for class with constructor
+     */
+    public function testGetClassConstructor(): void
     {
         $constructor = $this->class->getConstructor();
         $this->assertInstanceOf(ReflectionMethod::class, $constructor);
     }
 
-    public function testConstructorNull(): void
+    /**
+     * Tests that getConstructor() returns null for class without constructor
+     */
+    public function testGetClassConstructorReturnsNullForNoConstructor(): void
     {
         $constructor = (new ReflectionClass(FakeAnnotateClass::class))->getConstructor();
         $this->assertNull($constructor);
@@ -56,7 +71,10 @@ class ReflectionClassTest extends TestCase
         }
     }
 
-    public function testGetParentClass(): void
+    /**
+     * Tests that getParentClass() returns ReflectionClass instance for parent class
+     */
+    public function testGetParentClassReturnsReflectionClass(): void
     {
         $this->assertInstanceOf(ReflectionClass::class, (new ReflectionClass(FakeMockChild::class))->getParentClass());
     }

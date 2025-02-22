@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ray\Aop;
 
+use Override;
 use Ray\ServiceLocator\ServiceLocator;
 use ReturnTypeWillChange;
 
@@ -20,7 +21,7 @@ final class ReflectionClass extends \ReflectionClass implements Reader
      *
      * @psalm-suppress NoInterfaceProperties
      */
-    #[\Override]
+    #[Override]
     public function getAnnotations(): array
     {
         /** @var list<object> $annotations */
@@ -34,7 +35,7 @@ final class ReflectionClass extends \ReflectionClass implements Reader
      *
      * @psalm-external-mutation-free
      */
-    #[\Override]
+    #[Override]
     public function getAnnotation(string $annotationName)
     {
         $annotations = $this->getAnnotations();
@@ -54,7 +55,7 @@ final class ReflectionClass extends \ReflectionClass implements Reader
      *
      * @psalm-external-mutation-free
      */
-    #[\Override]
+    #[Override]
     public function getMethods($filter = null): array
     {
         unset($filter);
@@ -71,7 +72,7 @@ final class ReflectionClass extends \ReflectionClass implements Reader
      * @psalm-suppress MethodSignatureMismatch
      * @psalm-external-mutation-free
      */
-    #[\Override]
+    #[Override]
     public function getConstructor(): ?\ReflectionMethod
     {
         $parent = parent::getConstructor();
@@ -87,7 +88,7 @@ final class ReflectionClass extends \ReflectionClass implements Reader
      *
      * @psalm-external-mutation-free
      */
-    #[\Override]
+    #[Override]
     #[ReturnTypeWillChange]
     public function getParentClass()
     {

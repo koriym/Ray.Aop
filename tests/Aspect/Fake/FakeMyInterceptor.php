@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Ray\Aop;
 
+use function assert;
+use function is_string;
+
 class FakeMyInterceptor implements MethodInterceptor
 {
     public function invoke(MethodInvocation $invocation): string

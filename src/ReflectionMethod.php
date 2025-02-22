@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ray\Aop;
 
+use Override;
 use Ray\ServiceLocator\ServiceLocator;
 
 use function assert;
@@ -29,7 +30,7 @@ final class ReflectionMethod extends \ReflectionMethod implements Reader
      * @psalm-external-mutation-free
      * @psalm-suppress MethodSignatureMismatch
      */
-    #[\Override]
+    #[Override]
     public function getDeclaringClass(): ReflectionClass
     {
         if (! is_object($this->object)) {
@@ -48,7 +49,7 @@ final class ReflectionMethod extends \ReflectionMethod implements Reader
      *
      * @psalm-suppress NoInterfaceProperties
      */
-    #[\Override]
+    #[Override]
     public function getAnnotations(): array
     {
         assert(class_exists($this->class));
@@ -68,7 +69,7 @@ final class ReflectionMethod extends \ReflectionMethod implements Reader
      * @psalm-suppress MoreSpecificImplementedParamType
      * @psalm-external-mutation-free
      */
-    #[\Override]
+    #[Override]
     public function getAnnotation(string $annotationName)
     {
         $annotations = $this->getAnnotations();

@@ -32,7 +32,10 @@
             "Ray\\Aop\\": ["src/", "src-php8"],
             "Ray\\ServiceLocator\\": ["sl-src/"]
         },
-        "files": ["annotation_loader.php"]
+        "files": [
+            "annotation_loader.php",
+            "src-compat/Override.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

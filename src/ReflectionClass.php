@@ -29,8 +29,13 @@ class ReflectionClass extends \ReflectionClass implements Reader
     }
 
     /**
-     * {@inheritDoc}
+     * @param class-string<TAnnotation> $annotationName
      *
+     * @return TAnnotation|null
+     *
+     * @template TAnnotation of object
+     *
+     * @psalm-suppress MoreSpecificImplementedParamType
      * @psalm-external-mutation-free
      */
     public function getAnnotation(string $annotationName)

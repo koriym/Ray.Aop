@@ -51,8 +51,10 @@ final class CacheReader implements Reader
 
     /**
      * {@inheritDoc}
-     * @template T of object
+     *
      * @param ReflectionClass<T> $class
+     *
+     * @template T of object
      * @psalm-suppress MoreSpecificImplementedParamType
      */
     #[Override]

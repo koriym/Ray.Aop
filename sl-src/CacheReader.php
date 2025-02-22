@@ -46,7 +46,7 @@ final class CacheReader implements Reader
     public function __construct(Reader $reader, Cache $cache)
     {
         $this->delegate = $reader;
-        $this->cache    = $cache;
+        $this->cache = $cache;
     }
 
     /**
@@ -72,7 +72,15 @@ final class CacheReader implements Reader
     }
 
     /**
-     * {@inheritDoc}
+     * @param ReflectionClass<object>   $class
+     * @param class-string<TAnnotation> $annotationName
+     *
+     * @return TAnnotation|null
+     *
+     * @template TAnnotation of object
+     *
+     * @psalm-suppress MoreSpecificImplementedParamType
+     * @psalm-external-mutation-free
      */
     #[Override]
     public function getClassAnnotation(ReflectionClass $class, $annotationName)

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ray\Aop\Matcher;
 
+use Override;
 use Ray\Aop\AbstractMatcher;
 use Ray\Aop\Exception\InvalidAnnotationException;
 use ReflectionClass;
@@ -14,7 +15,7 @@ final class SubclassesOfMatcher extends AbstractMatcher
     /**
      * {@inheritDoc}
      */
-    #[\Override]
+    #[Override]
     public function matchesClass(ReflectionClass $class, array $arguments): bool
     {
         /** @var array<class-string> $arguments */
@@ -26,7 +27,7 @@ final class SubclassesOfMatcher extends AbstractMatcher
     /**
      * {@inheritDoc}
      */
-    #[\Override]
+    #[Override]
     public function matchesMethod(ReflectionMethod $method, array $arguments): bool
     {
         unset($method, $arguments);

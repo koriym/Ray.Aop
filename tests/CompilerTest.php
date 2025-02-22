@@ -8,7 +8,6 @@ use ArrayIterator;
 use Doctrine\Common\Annotations\AnnotationReader;
 use FakeGlobalEmptyNamespaced;
 use FakeGlobalNamespaced;
-use LogicException;
 use PHPUnit\Framework\TestCase;
 use Ray\Aop\Annotation\FakeMarker;
 use Ray\Aop\Annotation\FakeMarker3;
@@ -17,6 +16,7 @@ use ReflectionClass;
 use ReflectionMethod;
 
 use function array_shift;
+use function assert;
 use function class_exists;
 use function file_get_contents;
 use function is_array;

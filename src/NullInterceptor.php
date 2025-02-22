@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Ray\Aop;
 
-class NullInterceptor implements MethodInterceptor
+final class NullInterceptor implements MethodInterceptor
 {
     /** @return mixed */
     #[\Override]

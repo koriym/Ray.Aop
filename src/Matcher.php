@@ -9,7 +9,7 @@ use Ray\Aop\Exception\InvalidArgumentException;
 
 use function class_exists;
 
-class Matcher implements MatcherInterface
+final class Matcher implements MatcherInterface
 {
     /**
      * {@inheritDoc}

@@ -10,7 +10,7 @@ use ReflectionMethod;
 /**
  * Matcher for annotations
  */
-class AnnotatedMatcher extends BuiltinMatcher
+final class AnnotatedMatcher extends BuiltinMatcher
 {
     /**
      * @var class-string

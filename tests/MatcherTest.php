@@ -11,8 +11,12 @@ use ReflectionException;
 
 class MatcherTest extends TestCase
 {
-    /** @throws ReflectionException */
-    public function testReturnBuildInMatcher(): void
+    /**
+     * Tests returning various built-in matchers including any, annotatedWith, logicalAnd, logicalOr, logicalNot, startsWith, and subclassesOf
+     *
+     * @throws ReflectionException
+     */
+    public function testReturnBuiltInMatchers(): void
     {
         $this->assertInstanceOf(BuiltinMatcher::class, (new Matcher())->any());
         $this->assertInstanceOf(BuiltinMatcher::class, (new Matcher())->annotatedWith(FakeResource::class));
@@ -26,16 +30,24 @@ class MatcherTest extends TestCase
         $this->assertInstanceOf(BuiltinMatcher::class, (new Matcher())->subclassesOf(FakeClass::class));
     }
 
-    /** @throws ReflectionException */
-    public function testValidationForAnnotatedWith(): void
+    /**
+     * Tests that InvalidAnnotationException is thrown when annotatedWith matcher receives invalid class name
+     *
+     * @throws ReflectionException
+     */
+    public function testThrowExceptionForInvalidAnnotatedWith(): void
     {
         $this->expectException(InvalidAnnotationException::class);
 
         (new Matcher())->annotatedWith('__invalid_class');
     }
 
-    /** @throws ReflectionException */
-    public function testValidationForSubclassesOf(): void
+    /**
+     * Tests that InvalidArgumentException is thrown when subclassesOf matcher receives invalid class name
+     *
+     * @throws ReflectionException
+     */
+    public function testThrowExceptionForInvalidSubclassesOf(): void
     {
         $this->expectException(InvalidArgumentException::class);
 

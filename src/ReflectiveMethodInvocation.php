@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ray\Aop;
 
 use ArrayObject;
+use Override;
 use ReflectionClass;
 use ReflectionObject;
 
@@ -73,7 +74,7 @@ final class ReflectiveMethodInvocation implements MethodInvocation
         $this->interceptors = $interceptors;
     }
 
-    #[\Override]
+    #[Override]
     public function getMethod(): ReflectionMethod
     {
         if ($this->object instanceof WeavedInterface) {
@@ -95,7 +96,7 @@ final class ReflectiveMethodInvocation implements MethodInvocation
      *
      * @psalm-mutation-free
      */
-    #[\Override]
+    #[Override]
     public function getArguments(): ArrayObject
     {
         return $this->arguments;
@@ -106,7 +107,7 @@ final class ReflectiveMethodInvocation implements MethodInvocation
      *
      * @return NamedArguments
      */
-    #[\Override]
+    #[Override]
     public function getNamedArguments(): ArrayObject
     {
         $args = $this->getArguments();
@@ -125,7 +126,7 @@ final class ReflectiveMethodInvocation implements MethodInvocation
     /**
      * {@inheritDoc}
      */
-    #[\Override]
+    #[Override]
     public function proceed()
     {
         $interceptor = array_shift($this->interceptors);
@@ -141,7 +142,7 @@ final class ReflectiveMethodInvocation implements MethodInvocation
      *
      * @psalm-external-mutation-free
      */
-    #[\Override]
+    #[Override]
     public function getThis()
     {
         return $this->object;

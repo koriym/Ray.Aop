@@ -19,21 +19,30 @@ class BuiltInMatcherTest extends TestCase
         $this->matcher = new BuiltinMatcher('startsWith', ['Ray']);
     }
 
-    public function testMatchesClass(): void
+    /**
+     * Tests class name matching using startsWith built-in matcher
+     */
+    public function testMatchClassWithStartsWithMatcher(): void
     {
         $class = new ReflectionClass(FakeClass::class);
         $isMatched = $this->matcher->matchesClass($class, ['Ray\Aop']);
         $this->assertTrue($isMatched);
     }
 
-    public function testMatchesMethod(): void
+    /**
+     * Tests method name matching using startsWith built-in matcher
+     */
+    public function testMatchMethodWithStartsWithMatcher(): void
     {
         $method = new ReflectionMethod(FakeClass::class, 'getDouble');
         $isMatched = $this->matcher->matchesMethod($method, ['get']);
         $this->assertTrue($isMatched);
     }
 
-    public function testInvalidBuiltinMatcher(): void
+    /**
+     * Tests that InvalidMatcherException is thrown when using invalid built-in matcher
+     */
+    public function testThrowExceptionForInvalidBuiltinMatcher(): void
     {
         $this->expectException(InvalidMatcherException::class);
         new BuiltinMatcher('invalid', []);

@@ -8,6 +8,9 @@ use PHPUnit\Framework\TestCase;
 
 class PointcutTest extends TestCase
 {
+    /**
+     * Tests creating a new Pointcut instance
+     */
     public function testNew(): void
     {
         $pointCunt = new Pointcut(

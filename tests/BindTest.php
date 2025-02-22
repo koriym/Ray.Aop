@@ -24,14 +24,20 @@ class BindTest extends TestCase
         $this->bind = new Bind();
     }
 
-    public function testBindInterceptors(): void
+    /**
+     * Tests binding interceptors to a specific method
+     */
+    public function testBindInterceptorsToMethod(): void
     {
         $interceptors = [new FakeDoubleInterceptor(), new FakeDoubleInterceptor()];
         $this->bind->bindInterceptors('getDouble', $interceptors);
         $this->assertSame($this->bind->getBindings()['getDouble'], $interceptors);
     }
 
-    public function testBind(): void
+    /**
+     * Tests binding interceptors using a pointcut
+     */
+    public function testBindWithPointcut(): void
     {
         $interceptors = [new FakeDoubleInterceptor()];
         $pointcut = new Pointcut((new Matcher())->startsWith('Ray'), (new Matcher())->startsWith('get'), $interceptors);
@@ -40,7 +46,10 @@ class BindTest extends TestCase
         $this->assertSame($this->bind->getBindings()['getDouble'], $interceptors);
     }
 
-    public function testBindWithConstructor(): void
+    /**
+     * Tests binding interceptors to a class with constructor
+     */
+    public function testBindToClassWithConstructor(): void
     {
         $interceptors = [new FakeDoubleInterceptor()];
         $pointcut = new Pointcut((new Matcher())->startsWith('Ray'), (new Matcher())->startsWith('get'), $interceptors);
@@ -49,7 +58,10 @@ class BindTest extends TestCase
         $this->assertSame($this->bind->getBindings()['getDouble'], $interceptors);
     }
 
-    public function testBindUnmatched(): void
+    /**
+     * Tests binding with unmatched pointcut
+     */
+    public function testBindWithUnmatchedPointcut(): void
     {
         $interceptors = [new FakeDoubleInterceptor()];
         $pointcut = new Pointcut((new Matcher())->startsWith('XXX'), (new Matcher())->startsWith('get'), $interceptors);
@@ -57,8 +69,12 @@ class BindTest extends TestCase
         $this->assertSame($this->bind->getBindings(), []);
     }
 
-    /** @doesNotPerformAssertions */
-    public function testToString(): void
+    /**
+     * Tests string representation of Bind object
+     *
+     * @doesNotPerformAssertions
+     */
+    public function testBindToStringRepresentation(): void
     {
         $nullBind = (string) (new Bind());
 
@@ -68,7 +84,10 @@ class BindTest extends TestCase
         $bindString = (string) $this->bind;
     }
 
-    public function testMyMatcher(): void
+    /**
+     * Tests binding with custom matcher
+     */
+    public function testBindWithCustomMatcher(): void
     {
         $interceptors = [new FakeDoubleInterceptor()];
         $pointcut = new Pointcut(new FakeMatcher(), (new Matcher())->any(), $interceptors);
@@ -77,14 +96,20 @@ class BindTest extends TestCase
         $this->assertSame($this->bind->getBindings()['getDouble'], $interceptors);
     }
 
-    public function testNotClassMatch(): void
+    /**
+     * Tests binding when class does not match
+     */
+    public function testBindWhenClassDoesNotMatch(): void
     {
         $pointcut = new Pointcut(new FakeMatcher(false), (new Matcher())->any(), [new FakeDoubleInterceptor()]);
         $this->bind->bind(FakeAnnotateClass::class, [$pointcut]);
         $this->assertArrayNotHasKey('getDouble', $this->bind->getBindings());
     }
 
-    public function testOnionAnnotation(): void
+    /**
+     * Tests binding with multiple onion-style annotations
+     */
+    public function testBindWithMultipleAnnotations(): void
     {
         $onion1 = new FakeOnionInterceptor1();
         $onion2 = new FakeOnionInterceptor2();
@@ -101,7 +126,10 @@ class BindTest extends TestCase
         $this->assertSame($expect, $actual);
     }
 
-    public function testOnionAnnotationAndPriorityPointcut(): void
+    /**
+     * Tests binding with onion-style annotations and priority pointcut
+     */
+    public function testBindWithAnnotationsAndPriority(): void
     {
         $onion1 = new FakeOnionInterceptor1();
         $onion2 = new FakeOnionInterceptor2();

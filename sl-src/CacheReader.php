@@ -51,6 +51,9 @@ final class CacheReader implements Reader
 
     /**
      * {@inheritDoc}
+     * @template T of object
+     * @param ReflectionClass<T> $class
+     * @psalm-suppress MoreSpecificImplementedParamType
      */
     #[Override]
     public function getClassAnnotations(ReflectionClass $class)

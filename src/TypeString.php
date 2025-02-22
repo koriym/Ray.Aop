@@ -69,10 +69,12 @@ final class TypeString
     private function intersectionTypeToString(ReflectionIntersectionType $intersectionType): string
     {
         $types = $intersectionType->getTypes();
-        /** @var array<ReflectionNamedType> $types */
-        $typeStrings = array_map(static function (ReflectionNamedType $type): string {
-            return '\\' . $type->getName();
-        }, $types);
+        $typeStrings = [];
+
+        /** @var ReflectionNamedType $type */
+        foreach ($types as $type) {
+            $typeStrings[] = '\\' . $type->getName();
+        }
 
         return implode(' & ', $typeStrings);
     }

@@ -10,6 +10,7 @@ class FakeMyInterceptor implements MethodInterceptor
     {
         // Pre-processing logic
         $result = $invocation->proceed();
+        assert(is_string($result));
 
         // Post-processing logic
         return 'intercepted ' . $result;

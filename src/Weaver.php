@@ -56,9 +56,9 @@ final class Weaver
     public function newInstance(string $class, array $args): object
     {
         $aopClass = $this->weave($class);
+        /** @var T $instance */
         $instance = (new ReflectionClass($aopClass))->newInstanceArgs($args);
         if (! $instance instanceof WeavedInterface) {
-            /** @var T $instance  */
             return $instance;
         }
 

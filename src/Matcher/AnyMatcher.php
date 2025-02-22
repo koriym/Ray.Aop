@@ -21,7 +21,6 @@ final class AnyMatcher extends AbstractMatcher
 {
     /**
      * @var BuiltinMethodsNames
-     * @readonly
      */
     private static $builtinMethods = [];
 

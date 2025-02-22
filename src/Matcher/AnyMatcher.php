@@ -39,6 +39,7 @@ final class AnyMatcher extends AbstractMatcher
     /**
      * {@inheritDoc}
      */
+    #[\Override]
     public function matchesClass(ReflectionClass $class, array $arguments): bool
     {
         unset($class, $arguments);
@@ -49,6 +50,7 @@ final class AnyMatcher extends AbstractMatcher
     /**
      * {@inheritDoc}
      */
+    #[\Override]
     public function matchesMethod(ReflectionMethod $method, array $arguments): bool
     {
         unset($arguments);

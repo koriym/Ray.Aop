@@ -15,6 +15,7 @@ final class LogicalAndMatcher extends AbstractMatcher
     /**
      * {@inheritDoc}
      */
+    #[\Override]
     public function matchesClass(ReflectionClass $class, array $arguments): bool
     {
         $isAnd = true;
@@ -29,6 +30,7 @@ final class LogicalAndMatcher extends AbstractMatcher
     /**
      * {@inheritDoc}
      */
+    #[\Override]
     public function matchesMethod(ReflectionMethod $method, array $arguments): bool
     {
         $isAnd = true;

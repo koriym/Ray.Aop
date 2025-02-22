@@ -73,6 +73,7 @@ final class ReflectiveMethodInvocation implements MethodInvocation
         $this->interceptors = $interceptors;
     }
 
+    #[\Override]
     public function getMethod(): ReflectionMethod
     {
         if ($this->object instanceof WeavedInterface) {
@@ -94,6 +95,7 @@ final class ReflectiveMethodInvocation implements MethodInvocation
      *
      * @psalm-mutation-free
      */
+    #[\Override]
     public function getArguments(): ArrayObject
     {
         return $this->arguments;
@@ -104,6 +106,7 @@ final class ReflectiveMethodInvocation implements MethodInvocation
      *
      * @return NamedArguments
      */
+    #[\Override]
     public function getNamedArguments(): ArrayObject
     {
         $args = $this->getArguments();
@@ -122,6 +125,7 @@ final class ReflectiveMethodInvocation implements MethodInvocation
     /**
      * {@inheritDoc}
      */
+    #[\Override]
     public function proceed()
     {
         $interceptor = array_shift($this->interceptors);
@@ -137,6 +141,7 @@ final class ReflectiveMethodInvocation implements MethodInvocation
      *
      * @psalm-external-mutation-free
      */
+    #[\Override]
     public function getThis()
     {
         return $this->object;

@@ -20,6 +20,7 @@ class ReflectionClass extends \ReflectionClass implements Reader
      *
      * @psalm-suppress NoInterfaceProperties
      */
+    #[\Override]
     public function getAnnotations(): array
     {
         /** @var list<object> $annotations */
@@ -33,6 +34,7 @@ class ReflectionClass extends \ReflectionClass implements Reader
      *
      * @psalm-external-mutation-free
      */
+    #[\Override]
     public function getAnnotation(string $annotationName)
     {
         $annotations = $this->getAnnotations();
@@ -52,6 +54,7 @@ class ReflectionClass extends \ReflectionClass implements Reader
      *
      * @psalm-external-mutation-free
      */
+    #[\Override]
     public function getMethods($filter = null): array
     {
         unset($filter);
@@ -68,6 +71,7 @@ class ReflectionClass extends \ReflectionClass implements Reader
      * @psalm-suppress MethodSignatureMismatch
      * @psalm-external-mutation-free
      */
+    #[\Override]
     public function getConstructor(): ?\ReflectionMethod
     {
         $parent = parent::getConstructor();
@@ -83,6 +87,7 @@ class ReflectionClass extends \ReflectionClass implements Reader
      *
      * @psalm-external-mutation-free
      */
+    #[\Override]
     #[ReturnTypeWillChange]
     public function getParentClass()
     {

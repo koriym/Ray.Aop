@@ -65,7 +65,7 @@ final class Matcher implements MatcherInterface
     /**
      * {@inheritdoc}
      */
-    #[\Override]
+    #[Override]
     public function logicalOr(AbstractMatcher $matcherA, AbstractMatcher $matcherB) : AbstractMatcher
     {
         return new BuiltinMatcher(__FUNCTION__, func_get_args());
@@ -74,7 +74,7 @@ final class Matcher implements MatcherInterface
     /**
      * {@inheritdoc}
      */
-    #[\Override]
+    #[Override]
     public function logicalAnd(AbstractMatcher $matcherA, AbstractMatcher $matcherB) : AbstractMatcher
     {
         return new BuiltinMatcher(__FUNCTION__, func_get_args());

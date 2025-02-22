@@ -13,7 +13,7 @@ use function get_class_methods;
  * @template T of object
  * @template-extends \ReflectionClass<T>
  */
-class ReflectionClass extends \ReflectionClass implements Reader
+final class ReflectionClass extends \ReflectionClass implements Reader
 {
     /**
      * {@inheritDoc}

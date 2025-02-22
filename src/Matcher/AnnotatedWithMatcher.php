@@ -15,6 +15,7 @@ final class AnnotatedWithMatcher extends AbstractMatcher
     /**
      * {@inheritDoc}
      */
+    #[\Override]
     public function matchesClass(ReflectionClass $class, array $arguments): bool
     {
         assert($class instanceof \Ray\Aop\ReflectionClass);
@@ -29,6 +30,7 @@ final class AnnotatedWithMatcher extends AbstractMatcher
     /**
      * {@inheritDoc}
      */
+    #[\Override]
     public function matchesMethod(ReflectionMethod $method, array $arguments): bool
     {
         assert($method instanceof \Ray\Aop\ReflectionMethod);

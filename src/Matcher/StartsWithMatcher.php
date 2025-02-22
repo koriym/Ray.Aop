@@ -15,6 +15,7 @@ final class StartsWithMatcher extends AbstractMatcher
     /**
      * {@inheritDoc}
      */
+    #[\Override]
     public function matchesClass(ReflectionClass $class, array $arguments): bool
     {
         /** @var array<string> $arguments */
@@ -26,6 +27,7 @@ final class StartsWithMatcher extends AbstractMatcher
     /**
      * {@inheritDoc}
      */
+    #[\Override]
     public function matchesMethod(ReflectionMethod $method, array $arguments): bool
     {
         /** @var array<string> $arguments */

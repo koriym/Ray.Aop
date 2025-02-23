@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Ray\Aop;
 
-use Override;
 use Ray\Aop\Exception\InvalidMatcherException;
 use ReflectionMethod;
 
@@ -50,7 +49,6 @@ class BuiltinMatcher extends AbstractMatcher
     /**
      * {@inheritDoc}
      */
-    #[Override]
     public function matchesClass(\ReflectionClass $class, array $arguments): bool
     {
         return $this->matcher->matchesClass($class, $arguments);
@@ -59,7 +57,6 @@ class BuiltinMatcher extends AbstractMatcher
     /**
      * {@inheritDoc}
      */
-    #[Override]
     public function matchesMethod(ReflectionMethod $method, array $arguments): bool
     {
         return $this->matcher->matchesMethod($method, $arguments);

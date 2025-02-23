@@ -6,7 +6,6 @@ namespace Ray\ServiceLocator;
 
 use Doctrine\Common\Annotations\Reader;
 use LogicException;
-use Override;
 use ReflectionClass;
 use ReflectionMethod;
 use ReflectionProperty;
@@ -57,7 +56,6 @@ final class CacheReader implements Reader
      * @template T of object
      * @psalm-suppress MoreSpecificImplementedParamType
      */
-    #[Override]
     public function getClassAnnotations(ReflectionClass $class)
     {
         $cacheKey = $class->getName();
@@ -82,7 +80,6 @@ final class CacheReader implements Reader
      * @psalm-suppress MoreSpecificImplementedParamType
      * @psalm-external-mutation-free
      */
-    #[Override]
     public function getClassAnnotation(ReflectionClass $class, $annotationName)
     {
         foreach ($this->getClassAnnotations($class) as $annot) {
@@ -97,7 +94,6 @@ final class CacheReader implements Reader
     /**
      * {@inheritDoc}
      */
-    #[Override]
     public function getPropertyAnnotations(ReflectionProperty $property)
     {
         throw new LogicException(__FUNCTION__ . ' Not Supported');
@@ -106,7 +102,6 @@ final class CacheReader implements Reader
     /**
      * {@inheritDoc}
      */
-    #[Override]
     public function getPropertyAnnotation(ReflectionProperty $property, $annotationName)
     {
         throw new LogicException(__FUNCTION__ . ' Not Supported');
@@ -115,7 +110,6 @@ final class CacheReader implements Reader
     /**
      * {@inheritDoc}
      */
-    #[Override]
     public function getMethodAnnotations(ReflectionMethod $method)
     {
         $class    = $method->getDeclaringClass();
@@ -133,7 +127,6 @@ final class CacheReader implements Reader
     /**
      * {@inheritDoc}
      */
-    #[Override]
     public function getMethodAnnotation(ReflectionMethod $method, $annotationName)
     {
         foreach ($this->getMethodAnnotations($method) as $annot) {

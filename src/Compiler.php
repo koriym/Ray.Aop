@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Ray\Aop;
 
-use Override;
 use ParseError;
 use Ray\Aop\Exception\CompilationFailedException;
 use Ray\Aop\Exception\NotWritableException;
@@ -60,7 +59,6 @@ final class Compiler implements CompilerInterface
      * @template T of object
      * @psalm-immutable
      */
-    #[Override]
     public function newInstance(string $class, array $args, BindInterface $bind): object
     {
         $compiledClass = $this->compile($class, $bind);
@@ -85,7 +83,6 @@ final class Compiler implements CompilerInterface
      * @template T of object
      * @sideEffect Genaerates a new class file
      */
-    #[Override]
     public function compile(string $class, BindInterface $bind): string
     {
         if ($this->hasNoBinding($class, $bind)) {

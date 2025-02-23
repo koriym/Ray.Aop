@@ -33,8 +33,7 @@
             "Ray\\ServiceLocator\\": ["sl-src/"]
         },
         "files": [
-            "annotation_loader.php",
-            "src-compat/Override.php"
+            "annotation_loader.php"
         ]
     },
     "autoload-dev": {

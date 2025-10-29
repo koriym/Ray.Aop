@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ray\Aop\Matcher;
 
+use Override;
 use Ray\Aop\AbstractMatcher;
 use ReflectionClass;
 use ReflectionMethod;
@@ -15,7 +16,7 @@ final class LogicalNotMatcher extends AbstractMatcher
     /**
      * {@inheritDoc}
      */
-    #[\Override]
+    #[Override]
     public function matchesClass(ReflectionClass $class, array $arguments): bool
     {
         [$matcher] = $arguments;
@@ -27,7 +28,7 @@ final class LogicalNotMatcher extends AbstractMatcher
     /**
      * {@inheritDoc}
      */
-    #[\Override]
+    #[Override]
     public function matchesMethod(ReflectionMethod $method, array $arguments): bool
     {
         [$matcher] = $arguments;

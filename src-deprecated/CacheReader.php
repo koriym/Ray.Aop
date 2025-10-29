@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Ray\ServiceLocator;
 
-use Doctrine\Common\Annotations\Reader;
+use Koriym\Attributes\AttributeReaderInterface;
 use LogicException;
+use Override;
 use ReflectionClass;
 use ReflectionMethod;
 use ReflectionProperty;
@@ -27,10 +28,12 @@ use function rawurlencode;
  * @see https://github.com/doctrine/annotations/commits/2.0.x/lib/Doctrine/Common/Annotations/PsrCachedReader.php
  *
  * Many thanks to the Doctrine team for their great contributions to the PHP community over the years.
+ * @deprecated Use AttributeReaderInterface directly with your own caching layer.
+ * @psalm-suppress DeprecatedClass
  */
-final class CacheReader implements Reader
+final class CacheReader implements AttributeReaderInterface
 {
-    /** @var Reader */
+    /** @var AttributeReaderInterface */
     private $delegate;
 
     /** @var Cache */
@@ -42,7 +45,7 @@ final class CacheReader implements Reader
     /** @var int[] */
     private $loadedFilemtimes = [];
 
-    public function __construct(Reader $reader, Cache $cache)
+    public function __construct(AttributeReaderInterface $reader, Cache $cache)
     {
         $this->delegate = $reader;
         $this->cache    = $cache;
@@ -51,8 +54,8 @@ final class CacheReader implements Reader
     /**
      * {@inheritDoc}
      */
-    #[\Override]
-    public function getClassAnnotations(ReflectionClass $class)
+    #[Override]
+    public function getClassAnnotations(ReflectionClass $class): array
     {
         $cacheKey = $class->getName();
 
@@ -68,8 +71,8 @@ final class CacheReader implements Reader
     /**
      * {@inheritDoc}
      */
-    #[\Override]
-    public function getClassAnnotation(ReflectionClass $class, $annotationName)
+    #[Override]
+    public function getClassAnnotation(ReflectionClass $class, string $annotationName): ?object
     {
         foreach ($this->getClassAnnotations($class) as $annot) {
             if ($annot instanceof $annotationName) {
@@ -83,8 +86,8 @@ final class CacheReader implements Reader
     /**
      * {@inheritDoc}
      */
-    #[\Override]
-    public function getPropertyAnnotations(ReflectionProperty $property)
+    #[Override]
+    public function getPropertyAnnotations(ReflectionProperty $property): array
     {
         throw new LogicException(__FUNCTION__ . ' Not Supported');
     }
@@ -92,8 +95,8 @@ final class CacheReader implements Reader
     /**
      * {@inheritDoc}
      */
-    #[\Override]
-    public function getPropertyAnnotation(ReflectionProperty $property, $annotationName)
+    #[Override]
+    public function getPropertyAnnotation(ReflectionProperty $property, string $annotationName): ?object
     {
         throw new LogicException(__FUNCTION__ . ' Not Supported');
     }
@@ -101,8 +104,8 @@ final class CacheReader implements Reader
     /**
      * {@inheritDoc}
      */
-    #[\Override]
-    public function getMethodAnnotations(ReflectionMethod $method)
+    #[Override]
+    public function getMethodAnnotations(ReflectionMethod $method): array
     {
         $class    = $method->getDeclaringClass();
         $cacheKey = $class->getName() . '#' . $method->getName();
@@ -119,8 +122,8 @@ final class CacheReader implements Reader
     /**
      * {@inheritDoc}
      */
-    #[\Override]
-    public function getMethodAnnotation(ReflectionMethod $method, $annotationName)
+    #[Override]
+    public function getMethodAnnotation(ReflectionMethod $method, string $annotationName): ?object
     {
         foreach ($this->getMethodAnnotations($method) as $annot) {
             if ($annot instanceof $annotationName) {
@@ -150,6 +153,7 @@ final class CacheReader implements Reader
             function () use ($method, $reflector): array {
                 /** @var array<object> $annotations */
                 $annotations = $this->delegate->{$method}($reflector);
+
                 return $annotations;
             }
         );

@@ -7,10 +7,6 @@ namespace Ray\Aop\Annotation;
 use Attribute;
 use Ray\Aop\FakePhp81Enum;
 
-/**
- * @Annotation
- * @Target("METHOD")
- */
 #[Attribute(Attribute::TARGET_METHOD)]
 final class FakeMarker5
 {

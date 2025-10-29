@@ -4,7 +4,7 @@ parameters:
   phpVersion: 80200
   level: max
   paths:
-    - sl-src
+    - src-deprecated
     - src
     - tests
   excludePaths:

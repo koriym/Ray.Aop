@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ray\Aop;
 
+use Override;
 use ParseError;
 use Ray\Aop\Exception\CompilationFailedException;
 use Ray\Aop\Exception\NotWritableException;
@@ -18,8 +19,6 @@ use function is_writable;
 use function method_exists;
 use function sprintf;
 use function str_replace;
-
-use const PHP_VERSION_ID;
 
 /**
  *  Compiler
@@ -59,7 +58,7 @@ final class Compiler implements CompilerInterface
      * @template T of object
      * @psalm-immutable
      */
-    #[\Override]
+    #[Override]
     public function newInstance(string $class, array $args, BindInterface $bind): object
     {
         $compiledClass = $this->compile($class, $bind);
@@ -84,7 +83,7 @@ final class Compiler implements CompilerInterface
      * @template T of object
      * @sideEffect Genaerates a new class file
      */
-    #[\Override]
+    #[Override]
     public function compile(string $class, BindInterface $bind): string
     {
         if ($this->hasNoBinding($class, $bind)) {
@@ -143,7 +142,7 @@ final class Compiler implements CompilerInterface
     {
         $file = $this->getFileName($className->fqn);
         if (! file_exists($file)) {
-            $code = new AopCode(new MethodSignatureString(PHP_VERSION_ID));
+            $code = new AopCode(new MethodSignatureString());
             $aopCode = $code->generate($sourceClass, $bind, $className->postFix);
             file_put_contents($file, $aopCode);
         }

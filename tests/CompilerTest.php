@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace Ray\Aop;
 
 use ArrayIterator;
-use Doctrine\Common\Annotations\AnnotationReader;
 use FakeGlobalEmptyNamespaced;
 use FakeGlobalNamespaced;
-use LogicException;
+use Koriym\Attributes\AttributeReader;
 use PHPUnit\Framework\TestCase;
 use Ray\Aop\Annotation\FakeMarker;
 use Ray\Aop\Annotation\FakeMarker3;
@@ -17,6 +16,7 @@ use ReflectionClass;
 use ReflectionMethod;
 
 use function array_shift;
+use function assert;
 use function class_exists;
 use function file_get_contents;
 use function is_array;
@@ -206,7 +206,7 @@ class CompilerTest extends TestCase
     {
         $class = $this->compiler->compile(FakeAnnotateClass::class, $this->bind);
         /** @var object[] $annotations */
-        $annotations = (new AnnotationReader())->getMethodAnnotations(new ReflectionMethod($class, 'getDouble'));
+        $annotations = (new AttributeReader())->getMethodAnnotations(new ReflectionMethod($class, 'getDouble'));
         $this->assertCount(4, $annotations);
     }
 
@@ -214,7 +214,7 @@ class CompilerTest extends TestCase
     {
         $class = $this->compiler->compile(FakeAnnotateClassNoName::class, $this->bind);
         /** @var object[] $annotations */
-        $annotations = (new AnnotationReader())->getMethodAnnotations(new ReflectionMethod($class, 'getDouble'));
+        $annotations = (new AttributeReader())->getMethodAnnotations(new ReflectionMethod($class, 'getDouble'));
         $this->assertCount(3, $annotations);
     }
 

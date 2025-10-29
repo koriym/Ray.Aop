@@ -6,6 +6,7 @@ namespace Ray\Aop;
 
 use Generator;
 use IteratorAggregate;
+use Override;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use RegexIterator;
@@ -76,7 +77,7 @@ final class ClassList implements IteratorAggregate
     }
 
     /** @return Generator<class-string> */
-    #[\Override]
+    #[Override]
     public function getIterator(): Generator
     {
         $files = new RegexIterator(

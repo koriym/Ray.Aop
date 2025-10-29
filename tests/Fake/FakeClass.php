@@ -7,9 +7,7 @@ namespace Ray\Aop;
 use Ray\Aop\Annotation\FakeClassMarker;
 use Ray\Aop\Annotation\FakeMarker;
 
-/**
- * @FakeClassMarker
- */
+#[FakeClassMarker]
 class FakeClass
 {
     public $a = 0;
@@ -20,9 +18,7 @@ class FakeClass
         return 'toStringString';
     }
 
-    /**
-     * @FakeMarker(1)
-     */
+    #[FakeMarker(1)]
     public function add($n)
     {
         $this->a += $n;
@@ -38,9 +34,6 @@ class FakeClass
         return $a - $b;
     }
 
-    /**
-     * @Log
-     */
     public function getTriple(int $c): int
     {
         return $c * 3;

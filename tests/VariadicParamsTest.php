@@ -6,8 +6,6 @@ namespace Ray\Aop;
 
 use PHPUnit\Framework\TestCase;
 
-use function assert;
-
 class VariadicParamsTest extends TestCase
 {
     public function testVariadicParams(): void

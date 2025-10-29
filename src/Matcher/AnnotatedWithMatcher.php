@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ray\Aop\Matcher;
 
+use Override;
 use Ray\Aop\AbstractMatcher;
 use ReflectionClass;
 use ReflectionMethod;
@@ -15,7 +16,7 @@ final class AnnotatedWithMatcher extends AbstractMatcher
     /**
      * {@inheritDoc}
      */
-    #[\Override]
+    #[Override]
     public function matchesClass(ReflectionClass $class, array $arguments): bool
     {
         assert($class instanceof \Ray\Aop\ReflectionClass);
@@ -30,7 +31,7 @@ final class AnnotatedWithMatcher extends AbstractMatcher
     /**
      * {@inheritDoc}
      */
-    #[\Override]
+    #[Override]
     public function matchesMethod(ReflectionMethod $method, array $arguments): bool
     {
         assert($method instanceof \Ray\Aop\ReflectionMethod);

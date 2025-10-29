@@ -19,7 +19,6 @@ use function preg_replace_callback;
 use function sprintf;
 use function token_get_all;
 
-use const PHP_VERSION_ID;
 use const T_CLASS;
 use const T_EXTENDS;
 use const T_STRING;
@@ -227,7 +226,7 @@ final class AopCode
     /** @param ReflectionClass<object> $sourceClass */
     public function resolveInterceptTrait(ReflectionClass $sourceClass): void
     {
-        if (PHP_VERSION_ID >= 80200 && $sourceClass->isReadOnly()) {
+        if ($sourceClass->isReadOnly()) {
             $this->addReadOnlyInterceptorTrait();
 
             return;

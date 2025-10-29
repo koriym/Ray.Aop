@@ -199,26 +199,26 @@ class ContainsMatcher extends AbstractMatcher
 }
 ```
 
-アノテーション/属性
-Ray.Aopは[doctrine/annotation](https://github.com/doctrine/annotations)またはPHP 8の[Attributes](https://www.php.net/manual/en/language.attributes.overview.php)のどちらかも使用できます。
+## アトリビュート
+
+Ray.AopはPHP 8の[Attributes](https://www.php.net/manual/en/language.attributes.overview.php)を使用してアスペクトを定義します。Doctrineアノテーションはv2.15以降サポートされていません。
 
 ## AOPアライアンス
 
 このメソッドインターセプターのAPIは[AOPアライアンス](http://aopalliance.sourceforge.net/doc/org/aopalliance/intercept/MethodInterceptor.html)の部分実装です。
+
+## 必要環境
+
+- PHP 8.2 以上
+- Composer
 
 ## インストール
 
 Ray.Aopの推奨インストール方法は、[Composer](https://github.com/composer/composer)でのインストールです。
 
 ```bash
-# Ray.Aop を依存パッケージとして追加する
+# Ray.Aopをインストール
 $ composer require ray/aop ^2.0
-```
-
-### アトリビュートのみ使用（推奨）
-
-```php
-SevericeLocator::setReader(new AttributeReader);`
 ```
 
 ## DI Framework

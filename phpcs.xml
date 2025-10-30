@@ -39,12 +39,19 @@ com
         <exclude name="SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingNativeTypeHint"/>
         <exclude name="SlevomatCodingStandard.Classes.SuperfluousTraitNaming.SuperfluousSuffix"/>
         <exclude name="SlevomatCodingStandard.PHP.RequireExplicitAssertion.RequiredExplicitAssertion"/>
+        <!-- Deprecated sniffs -->
+        <exclude name="SlevomatCodingStandard.TypeHints.UnionTypeHintFormat"/>
+        <exclude name="Squiz.WhiteSpace.LanguageConstructSpacing"/>
         <!-- /Base -->
         <!-- Option -->
         <exclude name="SlevomatCodingStandard.Functions.RequireTrailingCommaInCall.MissingTrailingComma"/>
         <!-- /Option -->
         <!-- Exclude Fake files form Doctrine CS -->
     </rule>
+
+    <!-- Use recommended sniffs instead of deprecated ones -->
+    <rule ref="SlevomatCodingStandard.TypeHints.DNFTypeHintFormat"/>
+    <rule ref="Generic.WhiteSpace.LanguageConstructSpacing"/>
 
     <!-- Additional Rules -->
     <rule ref="SlevomatCodingStandard.Commenting.DocCommentSpacing">

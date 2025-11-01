@@ -11,6 +11,7 @@ use Ray\Aop\Types;
 use ReflectionClass;
 use ReflectionMethod;
 
+use function assert;
 use function in_array;
 use function str_starts_with;
 
@@ -20,8 +21,8 @@ use function str_starts_with;
  */
 final class AnyMatcher extends AbstractMatcher
 {
-    /** @var BuiltinMethodsNames */
-    private static $builtinMethods = [];
+    /** @var BuiltinMethodsNames|null */
+    private static $builtinMethods = null;
 
     public function __construct()
     {
@@ -52,9 +53,7 @@ final class AnyMatcher extends AbstractMatcher
         return ! ($this->isMagicMethod($method->name) || $this->isBuiltinMethod($method->name));
     }
 
-    /**
-     * @return BuiltinMethodsNames
-     */
+    /** @return BuiltinMethodsNames */
     private function getBuiltinMethods(): array
     {
         $methods = (new ReflectionClass(ArrayObject::class))->getMethods();
@@ -75,6 +74,8 @@ final class AnyMatcher extends AbstractMatcher
     /** @psalm-external-mutation-free */
     private function isBuiltinMethod(string $name): bool
     {
+        assert(self::$builtinMethods !== null);
+
         return in_array($name, self::$builtinMethods, true);
     }
 }

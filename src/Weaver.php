@@ -10,22 +10,23 @@ use function file_exists;
 use function sprintf;
 use function str_replace;
 
+/**
+ * @psalm-import-type BindingName from Types
+ * @psalm-import-type ScriptDir from Types
+ */
 final class Weaver
 {
     /** @var BindingName */
     private readonly string $bindName;
-
-    /** @var ScriptDir */
-    private readonly string $classDir;
-
     private readonly Compiler $compiler;
 
     /** @param ScriptDir $classDir */
-    public function __construct(private readonly BindInterface $bind, string $classDir)
+    public function __construct(private readonly BindInterface $bind, private readonly string $classDir)
     {
+        /** @psalm-suppress PropertyTypeCoercion */
+        /** @phpstan-ignore-next-line assign.propertyType */
         $this->bindName = (string) $this->bind;
         $this->compiler = new Compiler($classDir);
-        $this->classDir = $classDir;
     }
 
     /**

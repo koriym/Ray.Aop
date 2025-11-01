@@ -8,7 +8,11 @@ use Ray\Aop\ReflectiveMethodInvocation as Invocation;
 
 use function call_user_func_array;
 
-/** @psalm-import-type MethodBindings from Types */
+/**
+ * @psalm-import-type MethodBindings from Types
+ * @psalm-import-type MethodName from Types
+ * @psalm-import-type ConstructorArguments from Types
+ */
 trait InterceptTrait // @phpstan-ignore-line
 {
     /**
@@ -33,8 +37,8 @@ trait InterceptTrait // @phpstan-ignore-line
     }
 
     /**
-     * @param MethodName              $func
-     * @param ConstructorArguments    $args
+     * @param MethodName           $func
+     * @param ConstructorArguments $args
      *
      * @return mixed
      *

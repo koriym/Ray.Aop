@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ray\Aop;
 
 use ArrayObject;
+use ReflectionClass;
 
 /**
  * Type definitions for Ray.Aop
@@ -24,16 +25,16 @@ use ArrayObject;
  * Base Types
  * @psalm-type ArgumentList = ArrayObject<int, mixed>
  * @psalm-type NamedArguments = ArrayObject<MethodName, mixed>
- * @psalm-type InterceptorList = array<\Ray\Aop\MethodInterceptor>
+ * @psalm-type InterceptorList = array<MethodInterceptor>
  * @psalm-type ConstructorArguments = list<mixed>
- * @psalm-type ReflectionClassTemplate = \ReflectionClass<T>
+ * @psalm-type ReflectionClassTemplate = ReflectionClass<T>
  *
  * Matcher Types
  * @psalm-type MatcherArguments = array<array-key, mixed>
- * @psalm-type MethodInterceptors = array<array-key, \Ray\Aop\MethodInterceptor>
+ * @psalm-type MethodInterceptors = array<array-key, MethodInterceptor>
  * @psalm-type MatcherConfig = array{
- *   classMatcher: \Ray\Aop\AbstractMatcher,
- *   methodMatcher: \Ray\Aop\AbstractMatcher,
+ *   classMatcher: AbstractMatcher,
+ *   methodMatcher: AbstractMatcher,
  *   interceptors: MethodInterceptors
  * }
  * @psalm-type Arguments = array<array-key, mixed>
@@ -47,8 +48,8 @@ use ArrayObject;
  * @psalm-type ClassBoundInterceptors = array<ClassName, MethodBoundInterceptors>
  *
  * PointCut Types
- * @psalm-type PointcutInterceptors = array<\Ray\Aop\MethodInterceptor|class-string<\Ray\Aop\MethodInterceptor>>
- * @psalm-type Pointcuts = array<\Ray\Aop\Pointcut>
+ * @psalm-type PointcutInterceptors = array<MethodInterceptor|class-string<MethodInterceptor>>
+ * @psalm-type Pointcuts = array<Pointcut>
  * @phpcs:enable
  */
 final class Types

@@ -23,6 +23,7 @@ use function sys_get_temp_dir;
  * @psalm-import-type MatcherConfigList from Types
  * @psalm-import-type Arguments from Types
  * @psalm-import-type MethodName from Types
+ * @psalm-import-type ScriptDir from Types
  */
 final class Aspect
 {

@@ -7,9 +7,16 @@ namespace Ray\Aop\Matcher;
 use Override;
 use Ray\Aop\AbstractMatcher;
 use Ray\Aop\Exception\InvalidAnnotationException;
+use Ray\Aop\Types;
 use ReflectionClass;
 use ReflectionMethod;
 
+use function assert;
+use function is_string;
+
+/**
+ * @psalm-import-type Arguments from Types
+ */
 final class SubclassesOfMatcher extends AbstractMatcher
 {
     /**
@@ -20,7 +27,9 @@ final class SubclassesOfMatcher extends AbstractMatcher
     {
         /** @var Arguments $arguments */
         [$superClass] = $arguments;
+        assert(is_string($superClass));
 
+        /** @psalm-suppress ArgumentTypeCoercion */
         return $class->isSubclassOf($superClass) || ($class->name === $superClass);
     }
 

@@ -6,11 +6,17 @@ namespace Ray\Aop\Matcher;
 
 use Override;
 use Ray\Aop\AbstractMatcher;
+use Ray\Aop\Types;
 use ReflectionClass;
 use ReflectionMethod;
 
+use function assert;
+use function is_string;
 use function str_starts_with;
 
+/**
+ * @psalm-import-type Arguments from Types
+ */
 final class StartsWithMatcher extends AbstractMatcher
 {
     /**
@@ -21,6 +27,7 @@ final class StartsWithMatcher extends AbstractMatcher
     {
         /** @var Arguments $arguments */
         [$startsWith] = $arguments;
+        assert(is_string($startsWith));
 
         return str_starts_with($class->name, $startsWith);
     }
@@ -33,6 +40,7 @@ final class StartsWithMatcher extends AbstractMatcher
     {
         /** @var Arguments $arguments */
         [$startsWith] = $arguments;
+        assert(is_string($startsWith));
 
         return str_starts_with($method->name, $startsWith);
     }

@@ -21,6 +21,7 @@ use function method_intercept;
  * @psalm-import-type ClassBoundInterceptors from Types
  * @psalm-import-type MatcherConfigList from Types
  * @psalm-import-type MethodInterceptors from Types
+ * @psalm-import-type ScriptDir from Types
  * @codeCoverageIgnore
  */
 final class AspectPecl

@@ -17,6 +17,8 @@ use function is_callable;
  * @psalm-import-type ArgumentList from Types
  * @psalm-import-type NamedArguments from Types
  * @psalm-import-type InterceptorList from Types
+ * @psalm-import-type MethodName from Types
+ * @psalm-import-type ConstructorArguments from Types
  * @template T of object
  * @implements MethodInvocation<T>
  */
@@ -33,14 +35,13 @@ final class ReflectiveMethodInvocation implements MethodInvocation
      * @readonly
      */
     private $callable;
-
     private int $currentInterceptorIndex = 0;
 
     /**
-     * @param T                  $object       Target object
-     * @param MethodName         $method       Method name
-     * @param ConstructorArguments $arguments  Method arguments
-     * @param InterceptorList    $interceptors Method interceptors
+     * @param T                    $object       Target object
+     * @param MethodName           $method       Method name
+     * @param ConstructorArguments $arguments    Method arguments
+     * @param InterceptorList      $interceptors Method interceptors
      */
     public function __construct(
         /** @readonly */
@@ -54,6 +55,7 @@ final class ReflectiveMethodInvocation implements MethodInvocation
         $callable = [$this->object, $this->method];
         assert(is_callable($callable));
         $this->callable = $callable;
+        /** @psalm-suppress InvalidPropertyAssignmentValue */
         $this->arguments = new ArrayObject($arguments);
     }
 

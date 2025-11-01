@@ -7,6 +7,10 @@ namespace Ray\Aop;
 use Override;
 use Ray\Aop\Exception\LogicException;
 
+/**
+ * @psalm-import-type ClassBoundInterceptors from Types
+ * @psalm-import-type MethodInterceptors from Types
+ */
 final class PeclDispatcher implements MethodInterceptorInterface
 {
     /** @param ClassBoundInterceptors $interceptors */

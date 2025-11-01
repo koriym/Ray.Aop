@@ -28,6 +28,7 @@ use function str_replace;
  *  methods and ensures the classes are writable.
  *
  * @psalm-import-type ConstructorArguments from Types
+ * @psalm-import-type ScriptDir from Types
  */
 final class Compiler implements CompilerInterface
 {

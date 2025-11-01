@@ -6,11 +6,15 @@ namespace Ray\Aop\Matcher;
 
 use Override;
 use Ray\Aop\AbstractMatcher;
+use Ray\Aop\Types;
 use ReflectionClass;
 use ReflectionMethod;
 
 use function assert;
 
+/**
+ * @psalm-import-type Arguments from Types
+ */
 final class AnnotatedWithMatcher extends AbstractMatcher
 {
     /**
@@ -21,9 +25,12 @@ final class AnnotatedWithMatcher extends AbstractMatcher
     {
         assert($class instanceof \Ray\Aop\ReflectionClass);
         /** @var Arguments $arguments */
-        [$annotation] = $arguments;
+        [$annotationName] = $arguments;
+        assert(is_string($annotationName));
         /** @psalm-suppress MixedAssignment $annotation */
-        $annotation = $class->getAnnotation($annotation);
+        /** @psalm-suppress ArgumentTypeCoercion */
+        /** @phpstan-ignore-next-line argument.type, argument.templateType */
+        $annotation = $class->getAnnotation($annotationName);
 
         return (bool) $annotation;
     }
@@ -36,9 +43,12 @@ final class AnnotatedWithMatcher extends AbstractMatcher
     {
         assert($method instanceof \Ray\Aop\ReflectionMethod);
         /** @var Arguments $arguments */
-        [$annotation] = $arguments;
+        [$annotationName] = $arguments;
+        assert(is_string($annotationName));
 
-        $annotation = $method->getAnnotation($annotation);
+        /** @psalm-suppress ArgumentTypeCoercion */
+        /** @phpstan-ignore-next-line argument.type, argument.templateType */
+        $annotation = $method->getAnnotation($annotationName);
 
         return (bool) $annotation;
     }

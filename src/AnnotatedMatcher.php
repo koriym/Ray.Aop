@@ -10,6 +10,8 @@ use ReflectionMethod;
 
 /**
  * Matcher for annotations
+ *
+ * @psalm-import-type MatcherName from Types
  */
 final class AnnotatedMatcher extends BuiltinMatcher
 {

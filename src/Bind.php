@@ -26,7 +26,6 @@ final class Bind implements BindInterface
      * @var MethodBindings
      */
     private array $bindings = [];
-
     private readonly MethodMatch $methodMatch;
 
     public function __construct()

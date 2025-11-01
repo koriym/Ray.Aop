@@ -7,9 +7,7 @@ namespace Ray\Aop;
 /** @psalm-import-type PointcutInterceptors from Types */
 readonly class Pointcut
 {
-    /**
-     * @param PointcutInterceptors $interceptors
-     */
+    /** @param PointcutInterceptors $interceptors */
     public function __construct(
         public AbstractMatcher $classMatcher,
         public AbstractMatcher $methodMatcher,

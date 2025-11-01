@@ -34,7 +34,6 @@ final class AopCode
     public const INTERCEPT_STATEMENT = '\$this->_intercept(__FUNCTION__, func_get_args());';
 
     private string $code = '';
-
     private int $curlyBraceCount = 0;
 
     public function __construct(private readonly MethodSignatureString $methodSignature)

@@ -42,14 +42,15 @@ final class ReflectionMethod extends \ReflectionMethod
      * Get a specific attribute by name
      *
      * @param class-string<T> $annotationName
+     * @param int             $flags          Optional flags (e.g., ReflectionAttribute::IS_INSTANCEOF)
      *
      * @return T|null
      *
      * @template T of object
      */
-    public function getAnnotation(string $annotationName): object|null
+    public function getAnnotation(string $annotationName, int $flags = 0): object|null
     {
-        $attributes = $this->getAttributes($annotationName);
+        $attributes = $this->getAttributes($annotationName, $flags);
         if (isset($attributes[0])) {
             return $attributes[0]->newInstance();
         }

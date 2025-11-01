@@ -1,0 +1,12 @@
+{
+  "symbol-whitelist": [
+    "Doctrine\\Common\\Annotations\\AnnotationReader",
+    "Doctrine\\Common\\Annotations\\Reader",
+    "Koriym\\Attributes\\AttributeReader",
+    "Koriym\\Attributes\\AttributeReaderInterface",
+    "Koriym\\Attributes\\DualReader",
+    "method_intercept",
+    "Ray\\Aop\\MethodInterceptorInterface"
+  ],
+  "scan-files": []
+}

@@ -206,7 +206,7 @@ class CompilerTest extends TestCase
     {
         $class = $this->compiler->compile(FakeAnnotateClass::class, $this->bind);
         /** @var object[] $annotations */
-        $annotations = (new AttributeReader())->getMethodAnnotations(new ReflectionMethod($class, 'getDouble'));
+        $annotations = (new AttributeReader())->getMethodAttributes(new ReflectionMethod($class, 'getDouble'));
         $this->assertCount(4, $annotations);
     }
 
@@ -214,7 +214,7 @@ class CompilerTest extends TestCase
     {
         $class = $this->compiler->compile(FakeAnnotateClassNoName::class, $this->bind);
         /** @var object[] $annotations */
-        $annotations = (new AttributeReader())->getMethodAnnotations(new ReflectionMethod($class, 'getDouble'));
+        $annotations = (new AttributeReader())->getMethodAttributes(new ReflectionMethod($class, 'getDouble'));
         $this->assertCount(3, $annotations);
     }
 

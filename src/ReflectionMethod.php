@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Ray\Aop;
 
+use Koriym\Attributes\AttributeReader;
+use Koriym\Attributes\AttributeReaderInterface;
 use Override;
-use Ray\ServiceLocator\ServiceLocator;
 
 use function assert;
 use function class_exists;
@@ -15,6 +16,22 @@ final class ReflectionMethod extends \ReflectionMethod implements Reader
 {
     /** @var ?WeavedInterface */
     private $object;
+
+    private static ?AttributeReaderInterface $reader = null;
+
+    public static function setReader(AttributeReaderInterface $reader): void
+    {
+        self::$reader = $reader;
+    }
+
+    private static function getReader(): AttributeReaderInterface
+    {
+        if (self::$reader === null) {
+            self::$reader = new AttributeReader();
+        }
+
+        return self::$reader;
+    }
 
     /**
      * Set dependencies
@@ -55,7 +72,7 @@ final class ReflectionMethod extends \ReflectionMethod implements Reader
     {
         assert(class_exists($this->class));
         /** @var list<object> $annotations */
-        $annotations = ServiceLocator::getReader()->getMethodAnnotations(new \ReflectionMethod($this->class, $this->name));
+        $annotations = self::getReader()->getMethodAttributes(new \ReflectionMethod($this->class, $this->name));
 
         return $annotations;
     }

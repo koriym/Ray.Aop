@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Ray\Aop;
 
+use Koriym\Attributes\AttributeReader;
+use Koriym\Attributes\AttributeReaderInterface;
 use Override;
-use Ray\ServiceLocator\ServiceLocator;
 use ReturnTypeWillChange;
 
 use function get_class_methods;
@@ -16,6 +17,22 @@ use function get_class_methods;
  */
 final class ReflectionClass extends \ReflectionClass implements Reader
 {
+    private static ?AttributeReaderInterface $reader = null;
+
+    public static function setReader(AttributeReaderInterface $reader): void
+    {
+        self::$reader = $reader;
+    }
+
+    private static function getReader(): AttributeReaderInterface
+    {
+        if (self::$reader === null) {
+            self::$reader = new AttributeReader();
+        }
+
+        return self::$reader;
+    }
+
     /**
      * {@inheritDoc}
      *
@@ -26,7 +43,7 @@ final class ReflectionClass extends \ReflectionClass implements Reader
     public function getAnnotations(): array
     {
         /** @var list<object> $annotations */
-        $annotations = ServiceLocator::getReader()->getClassAnnotations(new \ReflectionClass($this->name));
+        $annotations = self::getReader()->getClassAttributes(new \ReflectionClass($this->name));
 
         return $annotations;
     }

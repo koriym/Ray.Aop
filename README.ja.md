@@ -20,7 +20,7 @@
 
 メソッドインターセプターがRay.Aopでどのように機能するかを明らかにするために、週末にはピザの注文を禁止するようにしてみましょう。デリバリーは平日だけ受け付ける事にして、ピザの注文を週末には受け付けないようにします！この例はAOPで認証を使用するときにのパターンと構造的に似ています。
 
-週末だけにするための[アノテーション](http://docs.doctrine-project.org/projects/doctrine-common/en/latest/reference/annotations.html)を定義します。
+週末だけにするためのアトリビュートを定義します。
 
 ```php
 <?php
@@ -60,7 +60,7 @@ class WeekendBlocker implements MethodInterceptor
 }
 ```
 
-設定完了しました。このコードでは「どのクラスでも」「メソッドに`@NotOnWeekends`アノテーションがある」という条件にマッチします。
+設定完了しました。このコードでは「どのクラスでも」「メソッドに`NotOnWeekends`アトリビュートがある」という条件にマッチします。
 
 ```php
 <?php
@@ -161,7 +161,7 @@ class MyInterceptor implements MethodInterceptor
  * [`$invocation->getNamedArguments()`](https://github.com/ray-di/Ray.Aop/blob/2.x/src/Invocation.php#L32) - 名前付き引数の取得
 
 
-拡張されたClassReflectionとMethodReflectionはPHP 8の属性とドクトリンアノテーションを取得するメソッドを提供します。
+拡張されたClassReflectionとMethodReflectionはPHP 8の属性を取得するメソッドを提供します。
  
 ```php
 /** @var $method \Ray\Aop\ReflectionMethod */
@@ -171,10 +171,10 @@ $class = $invocation->getMethod()->getDeclaringClass();
 ```
 
  
- * [`$method->getAnnotations()`]() - メソッドアトリビュート/アノテーションの取得
- * [`$method->getAnnotation($name)`]() 
- * [`$class->->getAnnotations()`]() - クラスアトリビュート/アノテーションの取得
- * [`$class->->getAnnotation($name)`]()
+ * `$method->getAnnotations()` - メソッドアトリビュートの取得
+ * `$method->getAnnotation($name)` - 指定したメソッドアトリビュートの取得
+ * `$class->getAnnotations()` - クラスアトリビュートの取得
+ * `$class->getAnnotation($name)` - 指定したクラスアトリビュートの取得
 
 ## 独自のマッチャー
 

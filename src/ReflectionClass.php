@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ray\Aop;
 
+use Override;
 use ReturnTypeWillChange;
 
 use function array_map;
@@ -56,7 +57,7 @@ final class ReflectionClass extends \ReflectionClass
      *
      * @psalm-external-mutation-free
      */
-    #[\Override]
+    #[Override]
     public function getMethods($filter = null): array
     {
         unset($filter);
@@ -69,11 +70,9 @@ final class ReflectionClass extends \ReflectionClass
         return $methods;
     }
 
-    /**
-     * @psalm-external-mutation-free
-     */
-    #[\Override]
-    public function getConstructor(): ?\ReflectionMethod
+    /** @psalm-external-mutation-free */
+    #[Override]
+    public function getConstructor(): \ReflectionMethod|null
     {
         $parent = parent::getConstructor();
         if ($parent === null) {
@@ -88,7 +87,7 @@ final class ReflectionClass extends \ReflectionClass
      *
      * @psalm-external-mutation-free
      */
-    #[\Override]
+    #[Override]
     #[ReturnTypeWillChange]
     public function getParentClass()
     {

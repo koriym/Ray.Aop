@@ -9,6 +9,7 @@ use Ray\Aop\Exception\InvalidAnnotationException;
 use Ray\Aop\Exception\InvalidArgumentException;
 
 use function class_exists;
+use function func_get_args;
 
 final class Matcher implements MatcherInterface
 {
@@ -63,19 +64,19 @@ final class Matcher implements MatcherInterface
     // @codingStandardsIgnoreStart
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     #[Override]
-    public function logicalOr(AbstractMatcher $matcherA, AbstractMatcher $matcherB) : AbstractMatcher
+    public function logicalOr(AbstractMatcher $matcherA, AbstractMatcher $matcherB): AbstractMatcher
     {
         return new BuiltinMatcher(__FUNCTION__, func_get_args());
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     #[Override]
-    public function logicalAnd(AbstractMatcher $matcherA, AbstractMatcher $matcherB) : AbstractMatcher
+    public function logicalAnd(AbstractMatcher $matcherA, AbstractMatcher $matcherB): AbstractMatcher
     {
         return new BuiltinMatcher(__FUNCTION__, func_get_args());
     }

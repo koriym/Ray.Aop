@@ -8,7 +8,6 @@ use ReflectionClass;
 use ReflectionMethod;
 
 use function array_key_exists;
-use function get_class;
 
 /**
  * @psalm-import-type MethodInterceptors from Types
@@ -83,11 +82,11 @@ final class MethodMatch
         ReflectionClass $class,
         ReflectionMethod $method,
         array $pointcuts,
-        array $annotations
+        array $annotations,
     ): array {
         // method bind in annotation order
         foreach ($annotations as $annotation) {
-            $annotationIndex = get_class($annotation);
+            $annotationIndex = $annotation::class;
             if (! array_key_exists($annotationIndex, $pointcuts)) {
                 continue;
             }

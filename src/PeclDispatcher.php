@@ -7,8 +7,6 @@ namespace Ray\Aop;
 use Override;
 use Ray\Aop\Exception\LogicException;
 
-use function get_class;
-
 final class PeclDispatcher implements MethodInterceptorInterface
 {
     /** @param array<string, array<string, array<MethodInterceptor>>> $interceptors */
@@ -28,7 +26,7 @@ final class PeclDispatcher implements MethodInterceptorInterface
     #[Override]
     public function intercept(object $object, string $method, array $params): mixed
     {
-        $class = get_class($object);
+        $class = $object::class;
         if (! isset($this->interceptors[$class][$method])) {
             throw new LogicException('Interceptors not found');
         }

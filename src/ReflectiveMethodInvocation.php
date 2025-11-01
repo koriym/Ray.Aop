@@ -63,7 +63,7 @@ final class ReflectiveMethodInvocation implements MethodInvocation
         object $object,
         string $method,
         array $arguments,
-        array $interceptors = []
+        array $interceptors = [],
     ) {
         $this->object = $object;
         $this->method = $method;

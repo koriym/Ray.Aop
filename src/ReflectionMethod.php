@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Ray\Aop;
 
+use Override;
+
 use function array_map;
 
 final class ReflectionMethod extends \ReflectionMethod
@@ -13,7 +15,7 @@ final class ReflectionMethod extends \ReflectionMethod
      *
      * @psalm-external-mutation-free
      */
-    #[\Override]
+    #[Override]
     public function getDeclaringClass(): ReflectionClass
     {
         $parent = parent::getDeclaringClass();

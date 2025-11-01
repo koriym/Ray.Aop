@@ -42,7 +42,7 @@ final class Aspect
     private $matchers = [];
 
     /** @param non-empty-string|null $tmpDir Directory for generated proxy classes */
-    public function __construct(?string $tmpDir = null)
+    public function __construct(string|null $tmpDir = null)
     {
         if ($tmpDir === null) {
             $tmp = sys_get_temp_dir();

@@ -99,7 +99,7 @@ final class Compiler implements CompilerInterface
         try {
             $this->requireFile($className, new ReflectionClass($class), $bind);
             // @codeCoverageIgnoreStart
-        } catch (ParseError $e) {
+        } catch (ParseError) {
             $msg = sprintf('class:%s Compilation failed in Ray.Aop. This is most likely a bug in Ray.Aop, please report it to the issue. https://github.com/ray-di/Ray.Aop/issues', $class);
 
             throw new CompilationFailedException($msg);

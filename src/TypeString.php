@@ -39,7 +39,7 @@ final class TypeString
     }
 
     /** @psalm-external-mutation-free */
-    public function __invoke(?ReflectionType $type): string
+    public function __invoke(ReflectionType|null $type): string
     {
         if (! $type) {
             return '';

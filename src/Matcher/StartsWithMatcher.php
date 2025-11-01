@@ -14,9 +14,7 @@ use function assert;
 use function is_string;
 use function str_starts_with;
 
-/**
- * @psalm-import-type Arguments from Types
- */
+/** @psalm-import-type Arguments from Types */
 final class StartsWithMatcher extends AbstractMatcher
 {
     /**

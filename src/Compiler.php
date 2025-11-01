@@ -105,8 +105,10 @@ final class Compiler implements CompilerInterface
             }
         }
 
-        /** @var class-string<T> */
-        return $className->fqn;
+        /** @var class-string<T> $fqn */
+        $fqn = $className->fqn;
+
+        return $fqn;
     }
 
     /** @param class-string $class */

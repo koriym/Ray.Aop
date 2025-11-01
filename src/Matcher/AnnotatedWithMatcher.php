@@ -11,10 +11,9 @@ use ReflectionClass;
 use ReflectionMethod;
 
 use function assert;
+use function is_string;
 
-/**
- * @psalm-import-type Arguments from Types
- */
+/** @psalm-import-type Arguments from Types */
 final class AnnotatedWithMatcher extends AbstractMatcher
 {
     /**

@@ -4,91 +4,48 @@ declare(strict_types=1);
 
 namespace Ray\Aop;
 
-use Koriym\Attributes\AttributeReader;
-use Koriym\Attributes\AttributeReaderInterface;
-use Override;
+use function array_map;
 
-use function assert;
-use function class_exists;
-use function is_object;
-
-final class ReflectionMethod extends \ReflectionMethod implements Reader
+final class ReflectionMethod extends \ReflectionMethod
 {
-    /** @var ?WeavedInterface */
-    private $object;
-
-    private static ?AttributeReaderInterface $reader = null;
-
-    public static function setReader(AttributeReaderInterface $reader): void
-    {
-        self::$reader = $reader;
-    }
-
-    private static function getReader(): AttributeReaderInterface
-    {
-        if (self::$reader === null) {
-            self::$reader = new AttributeReader();
-        }
-
-        return self::$reader;
-    }
-
-    /**
-     * Set dependencies
-     */
-    public function setObject(WeavedInterface $object): void
-    {
-        $this->object = $object;
-    }
-
     /**
      * @return ReflectionClass<object>
      *
      * @psalm-external-mutation-free
-     * @psalm-suppress MethodSignatureMismatch
      */
-    #[Override]
+    #[\Override]
     public function getDeclaringClass(): ReflectionClass
     {
-        if (! is_object($this->object)) {
-            return new ReflectionClass($this->class);
-        }
+        $parent = parent::getDeclaringClass();
 
-        $parencClass = (new \ReflectionClass($this->object))->getParentClass();
-        assert($parencClass instanceof \ReflectionClass);
-        $originalClass = $parencClass->name;
-
-        return new ReflectionClass($originalClass);
+        return new ReflectionClass($parent->getName());
     }
 
     /**
-     * {@inheritDoc}
+     * Get all attributes as instantiated objects
      *
-     * @psalm-suppress NoInterfaceProperties
-     * @psalm-suppress DeprecatedClass
+     * @return list<object>
      */
-    #[Override]
     public function getAnnotations(): array
     {
-        assert(class_exists($this->class));
-        /** @var list<object> $annotations */
-        $annotations = self::getReader()->getMethodAttributes(new \ReflectionMethod($this->class, $this->name));
+        $attributes = $this->getAttributes();
 
-        return $annotations;
+        return array_map(
+            static fn ($attribute) => $attribute->newInstance(),
+            $attributes
+        );
     }
 
     /**
+     * Get a specific attribute by name
+     *
      * @param class-string<T> $annotationName
      *
      * @return T|null
      *
      * @template T of object
-     *
-     * @psalm-suppress MoreSpecificImplementedParamType
-     * @psalm-external-mutation-free
      */
-    #[Override]
-    public function getAnnotation(string $annotationName)
+    public function getAnnotation(string $annotationName): object|null
     {
         $annotations = $this->getAnnotations();
         foreach ($annotations as $annotation) {

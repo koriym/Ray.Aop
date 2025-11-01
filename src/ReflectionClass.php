@@ -4,62 +4,42 @@ declare(strict_types=1);
 
 namespace Ray\Aop;
 
-use Koriym\Attributes\AttributeReader;
-use Koriym\Attributes\AttributeReaderInterface;
-use Override;
 use ReturnTypeWillChange;
 
+use function array_map;
 use function get_class_methods;
 
 /**
  * @template T of object
  * @template-extends \ReflectionClass<T>
  */
-final class ReflectionClass extends \ReflectionClass implements Reader
+final class ReflectionClass extends \ReflectionClass
 {
-    private static ?AttributeReaderInterface $reader = null;
-
-    public static function setReader(AttributeReaderInterface $reader): void
-    {
-        self::$reader = $reader;
-    }
-
-    private static function getReader(): AttributeReaderInterface
-    {
-        if (self::$reader === null) {
-            self::$reader = new AttributeReader();
-        }
-
-        return self::$reader;
-    }
-
     /**
-     * {@inheritDoc}
+     * Get all attributes as instantiated objects
      *
-     * @psalm-suppress NoInterfaceProperties
-     * @psalm-suppress DeprecatedClass
+     * @return list<object>
      */
-    #[Override]
     public function getAnnotations(): array
     {
-        /** @var list<object> $annotations */
-        $annotations = self::getReader()->getClassAttributes(new \ReflectionClass($this->name));
+        $attributes = $this->getAttributes();
 
-        return $annotations;
+        return array_map(
+            static fn ($attribute) => $attribute->newInstance(),
+            $attributes
+        );
     }
 
     /**
+     * Get a specific attribute by name
+     *
      * @param class-string<TAnnotation> $annotationName
      *
      * @return TAnnotation|null
      *
      * @template TAnnotation of object
-     *
-     * @psalm-suppress MoreSpecificImplementedParamType
-     * @psalm-external-mutation-free
      */
-    #[Override]
-    public function getAnnotation(string $annotationName)
+    public function getAnnotation(string $annotationName): object|null
     {
         $annotations = $this->getAnnotations();
         foreach ($annotations as $annotation) {
@@ -78,7 +58,7 @@ final class ReflectionClass extends \ReflectionClass implements Reader
      *
      * @psalm-external-mutation-free
      */
-    #[Override]
+    #[\Override]
     public function getMethods($filter = null): array
     {
         unset($filter);
@@ -92,10 +72,9 @@ final class ReflectionClass extends \ReflectionClass implements Reader
     }
 
     /**
-     * @psalm-suppress MethodSignatureMismatch
      * @psalm-external-mutation-free
      */
-    #[Override]
+    #[\Override]
     public function getConstructor(): ?\ReflectionMethod
     {
         $parent = parent::getConstructor();
@@ -111,7 +90,7 @@ final class ReflectionClass extends \ReflectionClass implements Reader
      *
      * @psalm-external-mutation-free
      */
-    #[Override]
+    #[\Override]
     #[ReturnTypeWillChange]
     public function getParentClass()
     {

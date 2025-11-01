@@ -7,13 +7,11 @@ namespace Ray\Aop;
 use ArrayIterator;
 use FakeGlobalEmptyNamespaced;
 use FakeGlobalNamespaced;
-use Koriym\Attributes\AttributeReader;
 use PHPUnit\Framework\TestCase;
 use Ray\Aop\Annotation\FakeMarker;
 use Ray\Aop\Annotation\FakeMarker3;
 use Ray\Aop\Exception\NotWritableException;
 use ReflectionClass;
-use ReflectionMethod;
 
 use function array_shift;
 use function assert;
@@ -206,7 +204,7 @@ class CompilerTest extends TestCase
     {
         $class = $this->compiler->compile(FakeAnnotateClass::class, $this->bind);
         /** @var object[] $annotations */
-        $annotations = (new AttributeReader())->getMethodAttributes(new ReflectionMethod($class, 'getDouble'));
+        $annotations = (new ReflectionMethod($class, 'getDouble'))->getAnnotations();
         $this->assertCount(4, $annotations);
     }
 
@@ -214,7 +212,7 @@ class CompilerTest extends TestCase
     {
         $class = $this->compiler->compile(FakeAnnotateClassNoName::class, $this->bind);
         /** @var object[] $annotations */
-        $annotations = (new AttributeReader())->getMethodAttributes(new ReflectionMethod($class, 'getDouble'));
+        $annotations = (new ReflectionMethod($class, 'getDouble'))->getAnnotations();
         $this->assertCount(3, $annotations);
     }
 

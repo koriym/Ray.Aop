@@ -41,11 +41,9 @@ final class ReflectionClass extends \ReflectionClass
      */
     public function getAnnotation(string $annotationName): object|null
     {
-        $annotations = $this->getAnnotations();
-        foreach ($annotations as $annotation) {
-            if ($annotation instanceof $annotationName) {
-                return $annotation;
-            }
+        $attributes = $this->getAttributes($annotationName);
+        if (isset($attributes[0])) {
+            return $attributes[0]->newInstance();
         }
 
         return null;

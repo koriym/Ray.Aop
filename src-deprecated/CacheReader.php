@@ -36,19 +36,15 @@ final class CacheReader implements AttributeReaderInterface
     /** @var AttributeReaderInterface */
     private $delegate;
 
-    /** @var Cache */
-    private $cache;
-
     /** @var array<string, array<object>> */
     private $loadedAnnotations = [];
 
     /** @var int[] */
     private $loadedFilemtimes = [];
 
-    public function __construct(AttributeReaderInterface $reader, Cache $cache)
+    public function __construct(AttributeReaderInterface $reader, private readonly Cache $cache)
     {
         $this->delegate = $reader;
-        $this->cache    = $cache;
     }
 
     /**
@@ -174,12 +170,8 @@ final class CacheReader implements AttributeReaderInterface
 
         $lastModification =  max(array_merge(
             [is_string($filename) ? filemtime($filename) : 0],
-            array_map(function (ReflectionClass $reflectionTrait): int {
-                return $this->getTraitLastModificationTime($reflectionTrait);
-            }, $class->getTraits()),
-            array_map(function (ReflectionClass $class): int {
-                return $this->getLastModification($class);
-            }, $class->getInterfaces()),
+            array_map($this->getTraitLastModificationTime(...), $class->getTraits()),
+            array_map($this->getLastModification(...), $class->getInterfaces()),
             $parent ? [$this->getLastModification($parent)] : []
         ));
 
@@ -198,9 +190,7 @@ final class CacheReader implements AttributeReaderInterface
 
         $lastModificationTime = max(array_merge(
             [is_string($fileName) ? filemtime($fileName) : 0],
-            array_map(function (ReflectionClass $reflectionTrait): int {
-                return $this->getTraitLastModificationTime($reflectionTrait);
-            }, $reflectionTrait->getTraits())
+            array_map($this->getTraitLastModificationTime(...), $reflectionTrait->getTraits())
         ));
 
         assert($lastModificationTime !== false);

@@ -39,12 +39,8 @@ final class AopCode
     /** @var int  */
     private $curlyBraceCount = 0;
 
-    /** @var MethodSignatureString */
-    private $methodSignature;
-
-    public function __construct(MethodSignatureString $methodSignature)
+    public function __construct(private readonly MethodSignatureString $methodSignature)
     {
-        $this->methodSignature = $methodSignature;
     }
 
     /**

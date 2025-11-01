@@ -24,28 +24,10 @@ use function is_callable;
 final class ReflectiveMethodInvocation implements MethodInvocation
 {
     /**
-     * @var T
-     * @readonly
-     */
-    private $object;
-
-    /**
      * @var ArgumentList
      * @readonly
      */
     private $arguments;
-
-    /**
-     * @var non-empty-string
-     * @readonly
-     */
-    private $method;
-
-    /**
-     * @var InterceptorList
-     * @psalm-readonly-allow-private-mutation
-     */
-    private $interceptors;
 
     /**
      * @var callable(mixed...): mixed
@@ -60,18 +42,18 @@ final class ReflectiveMethodInvocation implements MethodInvocation
      * @param InterceptorList   $interceptors Method interceptors
      */
     public function __construct(
-        object $object,
-        string $method,
+        /** @readonly */
+        private readonly object $object,
+        /** @readonly */
+        private readonly string $method,
         array $arguments,
-        array $interceptors = [],
+        /** @psalm-readonly-allow-private-mutation */
+        private array $interceptors = [],
     ) {
-        $this->object = $object;
-        $this->method = $method;
-        $callable = [$object, $method];
+        $callable = [$this->object, $this->method];
         assert(is_callable($callable));
         $this->callable = $callable;
         $this->arguments = new ArrayObject($arguments);
-        $this->interceptors = $interceptors;
     }
 
     #[Override]

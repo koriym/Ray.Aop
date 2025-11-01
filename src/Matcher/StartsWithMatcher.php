@@ -9,7 +9,7 @@ use Ray\Aop\AbstractMatcher;
 use ReflectionClass;
 use ReflectionMethod;
 
-use function strpos;
+use function str_starts_with;
 
 final class StartsWithMatcher extends AbstractMatcher
 {
@@ -22,7 +22,7 @@ final class StartsWithMatcher extends AbstractMatcher
         /** @var array<string> $arguments */
         [$startsWith] = $arguments;
 
-        return strpos($class->name, $startsWith) === 0;
+        return str_starts_with($class->name, $startsWith);
     }
 
     /**
@@ -34,6 +34,6 @@ final class StartsWithMatcher extends AbstractMatcher
         /** @var array<string> $arguments */
         [$startsWith] = $arguments;
 
-        return strpos($method->name, $startsWith) === 0;
+        return str_starts_with($method->name, $startsWith);
     }
 }

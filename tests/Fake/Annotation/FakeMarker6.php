@@ -8,11 +8,11 @@ use Attribute;
 use Ray\Aop\FakePhp81Enum;
 
 #[Attribute(Attribute::TARGET_METHOD)]
-final class FakeMarker6
+final readonly class FakeMarker6
 {
     public function __construct(
-        public readonly FakePhp81Enum $fruit1,
-        public readonly FakePhp81Enum $fruit2,
+        public FakePhp81Enum $fruit1,
+        public FakePhp81Enum $fruit2,
     ) {
     }
 }

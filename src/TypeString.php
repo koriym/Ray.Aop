@@ -21,20 +21,13 @@ use function sprintf;
 final class TypeString
 {
     /**
-     * @var string
-     * @readonly
-     */
-    private $nullableStr;
-
-    /**
      * @var bool
      * @readonly
      */
     private $hasUnionType;
 
-    public function __construct(string $nullableStr)
+    public function __construct(private readonly string $nullableStr)
     {
-        $this->nullableStr = $nullableStr;
         $this->hasUnionType = class_exists('ReflectionUnionType');
     }
 
@@ -86,9 +79,7 @@ final class TypeString
             if ($t instanceof ReflectionIntersectionType) {
                 $types = $t->getTypes();
                 /** @var array<ReflectionNamedType>  $types */
-                $intersectionTypes = array_map(static function (ReflectionNamedType $t): string {
-                    return self::getFqnType($t);
-                }, $types);
+                $intersectionTypes = array_map(self::getFqnType(...), $types);
 
                 return sprintf('(%s)', implode('&', $intersectionTypes));
             }

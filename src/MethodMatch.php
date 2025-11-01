@@ -17,14 +17,10 @@ use function array_key_exists;
  * @psalm-import-type Arguments from Types
  * @psalm-import-type Pointcuts from Types
  */
-final class MethodMatch
+final readonly class MethodMatch
 {
-    /** @var BindInterface */
-    private $bind;
-
-    public function __construct(BindInterface $bind)
+    public function __construct(private BindInterface $bind)
     {
-        $this->bind = $bind;
     }
 
     /**

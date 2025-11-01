@@ -19,23 +19,16 @@ use function ucwords;
 class BuiltinMatcher extends AbstractMatcher
 {
     /**
-     * @var string
-     * @readonly
-     */
-    private $matcherName;
-
-    /**
      * @var AbstractMatcher
      * @readonly
      */
     private $matcher;
 
     /** @param MatcherArguments $arguments */
-    public function __construct(string $matcherName, array $arguments)
+    public function __construct(private readonly string $matcherName, array $arguments)
     {
         parent::__construct();
 
-        $this->matcherName = $matcherName;
         $this->arguments = $arguments;
         $matcherClass = 'Ray\Aop\Matcher\\' . ucwords($this->matcherName) . 'Matcher';
         assert(class_exists($matcherClass));

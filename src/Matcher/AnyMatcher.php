@@ -12,7 +12,7 @@ use ReflectionClass;
 use ReflectionMethod;
 
 use function in_array;
-use function strpos;
+use function str_starts_with;
 
 /**
  * @psalm-import-type Arguments from Types
@@ -67,7 +67,7 @@ final class AnyMatcher extends AbstractMatcher
     /** @psalm-pure */
     private function isMagicMethod(string $name): bool
     {
-        return strpos($name, '__') === 0;
+        return str_starts_with($name, '__');
     }
 
     /** @psalm-external-mutation-free */

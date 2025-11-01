@@ -11,12 +11,10 @@
     ],
     "require": {
         "php": "^8.2",
-        "ext-hash": "*",
         "ext-tokenizer": "*"
     },
     "require-dev": {
         "bamarni/composer-bin-plugin": "^1.4.1",
-        "nikic/php-parser": "^4.16",
         "phpunit/phpunit": "^9.5.10"
     },
     "config": {

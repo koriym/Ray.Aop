@@ -8,12 +8,12 @@ use Ray\Aop\Annotation\FakeClassMarker;
 use Ray\Aop\Annotation\FakeMarker;
 
 #[FakeClassMarker]
-class FakeClass
+class FakeClass implements \Stringable
 {
     public $a = 0;
     public $msg = 'hello';
 
-    public function __toString()
+    public function __toString(): string
     {
         return 'toStringString';
     }

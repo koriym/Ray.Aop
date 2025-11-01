@@ -13,12 +13,6 @@ use function str_replace;
 final class Weaver
 {
     /**
-     * @var BindInterface
-     * @readonly
-     */
-    private $bind;
-
-    /**
      * @var string
      * @readonly
      */
@@ -37,10 +31,9 @@ final class Weaver
     private $compiler;
 
     /** @param non-empty-string $classDir */
-    public function __construct(BindInterface $bind, string $classDir)
+    public function __construct(private readonly BindInterface $bind, string $classDir)
     {
-        $this->bind = $bind;
-        $this->bindName = (string) $bind;
+        $this->bindName = (string) $this->bind;
         $this->compiler = new Compiler($classDir);
         $this->classDir = $classDir;
     }

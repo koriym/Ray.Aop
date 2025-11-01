@@ -9,14 +9,7 @@ use Attribute;
 #[Attribute(Attribute::TARGET_METHOD)]
 final class FakeMarkerName
 {
-    public int $a;
-    public string $b;
-    public bool $c;
-
-    public function __construct(int $a, string $b, bool $c)
+    public function __construct(public int $a, public string $b, public bool $c)
     {
-        $this->a = $a;
-        $this->b = $b;
-        $this->c = $c;
     }
 }

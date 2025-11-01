@@ -9,10 +9,7 @@ use Attribute;
 #[Attribute(Attribute::TARGET_METHOD | Attribute::IS_REPEATABLE)]
 final class FakeMarker
 {
-    public int $value;
-
-    public function __construct(int $value)
+    public function __construct(public int $value)
     {
-        $this->value = $value;
     }
 }

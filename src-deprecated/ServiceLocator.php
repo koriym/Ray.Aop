@@ -17,7 +17,7 @@ use function vsprintf;
  * ServiceLocator class provides a way to set and retrieve a Reader instance.
  * It includes mechanisms to lazily initialize the Reader if it hasn't been set.
  *
- * @deprecated Use AttributeReaderInterface directly instead.
+ * @deprecated This class is no longer used by Ray.Aop. Please remove the calling code.
  */
 final class ServiceLocator
 {

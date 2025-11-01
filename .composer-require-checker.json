@@ -8,5 +8,14 @@
     "method_intercept",
     "Ray\\Aop\\MethodInterceptorInterface"
   ],
+  "php-core-extensions": [
+    "Core",
+    "standard",
+    "SPL",
+    "Reflection",
+    "pcre",
+    "hash",
+    "tokenizer"
+  ],
   "scan-files": []
 }

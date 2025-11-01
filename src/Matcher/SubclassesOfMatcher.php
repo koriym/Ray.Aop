@@ -18,7 +18,7 @@ final class SubclassesOfMatcher extends AbstractMatcher
     #[Override]
     public function matchesClass(ReflectionClass $class, array $arguments): bool
     {
-        /** @var array<class-string> $arguments */
+        /** @var Arguments $arguments */
         [$superClass] = $arguments;
 
         return $class->isSubclassOf($superClass) || ($class->name === $superClass);

@@ -26,8 +26,7 @@ final class MethodSignatureString
     private const NULLABLE = 'null|';
     private const INDENT = '    ';
 
-    /** @var TypeString  */
-    private $typeString;
+    private readonly TypeString $typeString;
 
     public function __construct()
     {
@@ -46,7 +45,7 @@ final class MethodSignatureString
     }
 
     /**
-     * @return array<string>
+     * @return list<string>
      *
      * @psalm-pure
      */
@@ -57,7 +56,7 @@ final class MethodSignatureString
         return is_string($docComment) ? [$docComment . PHP_EOL] : [];
     }
 
-    /** @param array<string> $signatureParts */
+    /** @param list<string> $signatureParts */
     private function addAttributes(ReflectionMethod $method, array &$signatureParts): void
     {
         $attributes = $method->getAttributes();
@@ -86,9 +85,9 @@ final class MethodSignatureString
     }
 
     /**
-     * @param array<string> $signatureParts
+     * @param list<string> $signatureParts
      *
-     * @return array<string>
+     * @return list<string>
      */
     private function addAccessModifiers(ReflectionMethod $method, array $signatureParts): array
     {
@@ -98,9 +97,9 @@ final class MethodSignatureString
     }
 
     /**
-     * @param array<string> $signatureParts
+     * @param list<string> $signatureParts
      *
-     * @return array<string>
+     * @return list<string>
      */
     private function addMethodSignature(ReflectionMethod $method, array $signatureParts): array
     {

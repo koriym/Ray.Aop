@@ -19,7 +19,7 @@ final class StartsWithMatcher extends AbstractMatcher
     #[Override]
     public function matchesClass(ReflectionClass $class, array $arguments): bool
     {
-        /** @var array<string> $arguments */
+        /** @var Arguments $arguments */
         [$startsWith] = $arguments;
 
         return str_starts_with($class->name, $startsWith);
@@ -31,7 +31,7 @@ final class StartsWithMatcher extends AbstractMatcher
     #[Override]
     public function matchesMethod(ReflectionMethod $method, array $arguments): bool
     {
-        /** @var array<string> $arguments */
+        /** @var Arguments $arguments */
         [$startsWith] = $arguments;
 
         return str_starts_with($method->name, $startsWith);

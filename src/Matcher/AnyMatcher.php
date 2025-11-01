@@ -27,11 +27,7 @@ final class AnyMatcher extends AbstractMatcher
     {
         parent::__construct();
 
-        if (self::$builtinMethods !== []) {
-            return;
-        }
-
-        $this->setBuildInMethods();
+        self::$builtinMethods ??= $this->getBuiltinMethods();
     }
 
     /**
@@ -56,12 +52,18 @@ final class AnyMatcher extends AbstractMatcher
         return ! ($this->isMagicMethod($method->name) || $this->isBuiltinMethod($method->name));
     }
 
-    private function setBuildInMethods(): void
+    /**
+     * @return BuiltinMethodsNames
+     */
+    private function getBuiltinMethods(): array
     {
         $methods = (new ReflectionClass(ArrayObject::class))->getMethods();
+        $builtinMethods = [];
         foreach ($methods as $method) {
-            self::$builtinMethods[] = $method->name;
+            $builtinMethods[] = $method->name;
         }
+
+        return $builtinMethods;
     }
 
     /** @psalm-pure */

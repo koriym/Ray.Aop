@@ -12,25 +12,15 @@ use function str_replace;
 
 final class Weaver
 {
-    /**
-     * @var string
-     * @readonly
-     */
-    private $bindName;
+    /** @var BindingName */
+    private readonly string $bindName;
 
-    /**
-     * @var string
-     * @readonly
-     */
-    private $classDir;
+    /** @var ScriptDir */
+    private readonly string $classDir;
 
-    /**
-     * @var Compiler
-     * @readonly
-     */
-    private $compiler;
+    private readonly Compiler $compiler;
 
-    /** @param non-empty-string $classDir */
+    /** @param ScriptDir $classDir */
     public function __construct(private readonly BindInterface $bind, string $classDir)
     {
         $this->bindName = (string) $this->bind;

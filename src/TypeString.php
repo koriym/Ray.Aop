@@ -11,7 +11,6 @@ use ReflectionUnionType;
 
 use function array_map;
 use function assert;
-use function class_exists;
 use function implode;
 use function sprintf;
 
@@ -20,15 +19,8 @@ use function sprintf;
  */
 final class TypeString
 {
-    /**
-     * @var bool
-     * @readonly
-     */
-    private $hasUnionType;
-
     public function __construct(private readonly string $nullableStr)
     {
-        $this->hasUnionType = class_exists('ReflectionUnionType');
     }
 
     /** @psalm-external-mutation-free */
@@ -38,8 +30,7 @@ final class TypeString
             return '';
         }
 
-        // PHP 8.0+
-        if ($this->hasUnionType && $type instanceof ReflectionUnionType) {
+        if ($type instanceof ReflectionUnionType) {
             return $this->getUnionType($type);
         }
 

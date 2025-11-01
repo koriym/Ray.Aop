@@ -9,7 +9,7 @@ use Ray\Aop\Exception\LogicException;
 
 final class PeclDispatcher implements MethodInterceptorInterface
 {
-    /** @param array<string, array<string, array<MethodInterceptor>>> $interceptors */
+    /** @param ClassBoundInterceptors $interceptors */
     public function __construct(private array $interceptors)
     {
     }
@@ -31,7 +31,7 @@ final class PeclDispatcher implements MethodInterceptorInterface
             throw new LogicException('Interceptors not found');
         }
 
-        /** @var array<MethodInterceptor> $interceptors */
+        /** @var MethodInterceptors $interceptors */
         $interceptors = $this->interceptors[$class][$method];
 
         /** @phpstan-ignore-next-line argument.type */

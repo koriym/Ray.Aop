@@ -9,7 +9,6 @@ use Override;
 use ReflectionClass;
 use ReflectionObject;
 
-use function array_shift;
 use function assert;
 use function call_user_func_array;
 use function is_callable;
@@ -35,11 +34,13 @@ final class ReflectiveMethodInvocation implements MethodInvocation
      */
     private $callable;
 
+    private int $currentInterceptorIndex = 0;
+
     /**
-     * @param T                 $object       Target object
-     * @param non-empty-string  $method       Method name
-     * @param array<int, mixed> $arguments    Method arguments
-     * @param InterceptorList   $interceptors Method interceptors
+     * @param T                  $object       Target object
+     * @param MethodName         $method       Method name
+     * @param ConstructorArguments $arguments  Method arguments
+     * @param InterceptorList    $interceptors Method interceptors
      */
     public function __construct(
         /** @readonly */
@@ -47,8 +48,8 @@ final class ReflectiveMethodInvocation implements MethodInvocation
         /** @readonly */
         private readonly string $method,
         array $arguments,
-        /** @psalm-readonly-allow-private-mutation */
-        private array $interceptors = [],
+        /** @readonly */
+        private readonly array $interceptors = [],
     ) {
         $callable = [$this->object, $this->method];
         assert(is_callable($callable));
@@ -109,10 +110,9 @@ final class ReflectiveMethodInvocation implements MethodInvocation
     #[Override]
     public function proceed()
     {
-        $interceptors = $this->interceptors;
-        $interceptor = array_shift($interceptors);
-        $this->interceptors = $interceptors;
-        if ($interceptor instanceof MethodInterceptor) {
+        if (isset($this->interceptors[$this->currentInterceptorIndex])) {
+            $interceptor = $this->interceptors[$this->currentInterceptorIndex++];
+
             return $interceptor->invoke($this);
         }
 

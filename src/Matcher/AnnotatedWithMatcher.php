@@ -20,7 +20,7 @@ final class AnnotatedWithMatcher extends AbstractMatcher
     public function matchesClass(ReflectionClass $class, array $arguments): bool
     {
         assert($class instanceof \Ray\Aop\ReflectionClass);
-        /** @var array<class-string> $arguments */
+        /** @var Arguments $arguments */
         [$annotation] = $arguments;
         /** @psalm-suppress MixedAssignment $annotation */
         $annotation = $class->getAnnotation($annotation);
@@ -35,7 +35,7 @@ final class AnnotatedWithMatcher extends AbstractMatcher
     public function matchesMethod(ReflectionMethod $method, array $arguments): bool
     {
         assert($method instanceof \Ray\Aop\ReflectionMethod);
-        /** @var array<class-string> $arguments */
+        /** @var Arguments $arguments */
         [$annotation] = $arguments;
 
         $annotation = $method->getAnnotation($annotation);

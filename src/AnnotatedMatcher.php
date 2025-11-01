@@ -20,7 +20,7 @@ final class AnnotatedMatcher extends BuiltinMatcher
     public $annotation;
 
     /**
-     * @param non-empty-string       $matcherName
+     * @param MatcherName            $matcherName
      * @param array{0: class-string} $arguments   Single element array containing annotation class name
      */
     public function __construct(string $matcherName, array $arguments)

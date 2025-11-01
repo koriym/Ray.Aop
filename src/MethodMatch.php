@@ -29,7 +29,7 @@ final readonly class MethodMatch
      */
     public function __invoke(ReflectionClass $class, \Ray\Aop\ReflectionMethod $method, array $pointcuts): void
     {
-        /** @var array<int, object> $annotations */
+        /** @var list<object> $annotations */
         $annotations = $method->getAnnotations();
         // priority bind
         foreach ($pointcuts as $key => $pointcut) {
@@ -69,10 +69,10 @@ final readonly class MethodMatch
 
     /**
      * @param ReflectionClass<object> $class
-     * @param Pointcut[]              $pointcuts
-     * @param array<int, object>      $annotations
+     * @param Pointcuts               $pointcuts
+     * @param list<object>            $annotations
      *
-     * @return Pointcut[]
+     * @return Pointcuts
      */
     private function onionOrderMatch(
         ReflectionClass $class,

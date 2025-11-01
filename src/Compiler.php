@@ -32,12 +32,12 @@ use function str_replace;
 final class Compiler implements CompilerInterface
 {
     /**
-     * @var non-empty-string
+     * @var ScriptDir
      * @readonly
      */
     public $classDir;
 
-    /** @param  non-empty-string $classDir */
+    /** @param ScriptDir $classDir */
     public function __construct(string $classDir)
     {
         if (! is_writable($classDir)) {
@@ -92,25 +92,20 @@ final class Compiler implements CompilerInterface
         }
 
         $className = new AopPostfixClassName($class, (string) $bind, $this->classDir);
-        if (class_exists($className->fqn, false)) {
-            goto return_fqn;
+        if (! class_exists($className->fqn, false)) {
+            try {
+                $this->requireFile($className, new ReflectionClass($class), $bind);
+                // @codeCoverageIgnoreStart
+            } catch (ParseError) {
+                $msg = sprintf('class:%s Compilation failed in Ray.Aop. This is most likely a bug in Ray.Aop, please report it to the issue. https://github.com/ray-di/Ray.Aop/issues', $class);
+
+                throw new CompilationFailedException($msg);
+                // @codeCoverageIgnoreEnd
+            }
         }
 
-        try {
-            $this->requireFile($className, new ReflectionClass($class), $bind);
-            // @codeCoverageIgnoreStart
-        } catch (ParseError) {
-            $msg = sprintf('class:%s Compilation failed in Ray.Aop. This is most likely a bug in Ray.Aop, please report it to the issue. https://github.com/ray-di/Ray.Aop/issues', $class);
-
-            throw new CompilationFailedException($msg);
-            // @codeCoverageIgnoreEnd
-        }
-
-        return_fqn:
-        $fqn = $className->fqn; // phpcs:ignore SlevomatCodingStandard.Variables.UselessVariable.UselessVariable
-        /** @var class-string<T> $fqn */
-
-        return $fqn;
+        /** @var class-string<T> */
+        return $className->fqn;
     }
 
     /** @param class-string $class */

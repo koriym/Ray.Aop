@@ -18,11 +18,7 @@ use function ucwords;
  */
 class BuiltinMatcher extends AbstractMatcher
 {
-    /**
-     * @var AbstractMatcher
-     * @readonly
-     */
-    private $matcher;
+    private readonly AbstractMatcher $matcher;
 
     /** @param MatcherArguments $arguments */
     public function __construct(private readonly string $matcherName, array $arguments)

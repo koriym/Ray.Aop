@@ -33,7 +33,8 @@ trait InterceptTrait // @phpstan-ignore-line
     }
 
     /**
-     * @param array<string, mixed> $args
+     * @param MethodName              $func
+     * @param ConstructorArguments    $args
      *
      * @return mixed
      *

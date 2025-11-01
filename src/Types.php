@@ -10,6 +10,7 @@ use ArrayObject;
  * Type definitions for Ray.Aop
  *
  * @phpcs:disable SlevomatCodingStandard.Commenting.DocCommentSpacing
+ * @psalm-suppress UnusedClass
  * @template T of object
  *
  * Domain Types
@@ -23,16 +24,16 @@ use ArrayObject;
  * Base Types
  * @psalm-type ArgumentList = ArrayObject<int, mixed>
  * @psalm-type NamedArguments = ArrayObject<MethodName, mixed>
- * @psalm-type InterceptorList = array<MethodInterceptor>
+ * @psalm-type InterceptorList = array<\Ray\Aop\MethodInterceptor>
  * @psalm-type ConstructorArguments = list<mixed>
- * @psalm-type ReflectionClassTemplate = ReflectionClass<T>
+ * @psalm-type ReflectionClassTemplate = \ReflectionClass<T>
  *
  * Matcher Types
  * @psalm-type MatcherArguments = array<array-key, mixed>
- * @psalm-type MethodInterceptors = array<array-key, MethodInterceptor>
+ * @psalm-type MethodInterceptors = array<array-key, \Ray\Aop\MethodInterceptor>
  * @psalm-type MatcherConfig = array{
- *   classMatcher: AbstractMatcher,
- *   methodMatcher: AbstractMatcher,
+ *   classMatcher: \Ray\Aop\AbstractMatcher,
+ *   methodMatcher: \Ray\Aop\AbstractMatcher,
  *   interceptors: MethodInterceptors
  * }
  * @psalm-type Arguments = array<array-key, mixed>
@@ -46,7 +47,8 @@ use ArrayObject;
  * @psalm-type ClassBoundInterceptors = array<ClassName, MethodBoundInterceptors>
  *
  * PointCut Types
- * @psalm-type Pointcuts = array<Pointcut>
+ * @psalm-type PointcutInterceptors = array<\Ray\Aop\MethodInterceptor|class-string<\Ray\Aop\MethodInterceptor>>
+ * @psalm-type Pointcuts = array<\Ray\Aop\Pointcut>
  * @phpcs:enable
  */
 final class Types

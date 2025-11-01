@@ -35,7 +35,7 @@ final class AspectPecl
     /**
      * Weave aspects into classes in the specified directory
      *
-     * @param non-empty-string  $classDir Target class directory
+     * @param ScriptDir         $classDir Target class directory
      * @param MatcherConfigList $matchers List of matchers and interceptors
      *
      * @throws RuntimeException When Ray.Aop extension is not loaded.

@@ -33,8 +33,15 @@ final class ServiceLocator
     public static function getReader(): Reader
     {
         if (! class_exists(AttributeReader::class)) {
-            trigger_error(vsprintf('Please install "koriym/attributes" to use %s', [self::class]), E_USER_DEPRECATED);
+            $message = vsprintf(
+                '%s is deprecated. ' .
+                'Please install "koriym/attributes" in your project if you need this class, ' .
+                'or migrate to native PHP 8 attributes.',
+                [self::class],
+            );
+            trigger_error($message, E_USER_ERROR);
         }
+
         if (! self::$reader) {
             self::$reader = new DualReader(new AnnotationReader(), new AttributeReader());
         }
